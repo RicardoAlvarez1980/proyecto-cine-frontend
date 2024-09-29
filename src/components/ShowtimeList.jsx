@@ -19,12 +19,18 @@ const ShowtimeList = () => {
 
   const formatTime = (isoDate) => {
     const date = new Date(isoDate);
-    return date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const localDate = new Date(date.getTime() + (3 * 60 * 60 * 1000)); // Resta 3 horas para UTC-3
+    return localDate.toLocaleTimeString('es-AR', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: false,
+      timeZone: 'America/Argentina/Buenos_Aires' 
+    });
   };
 
   return (
     <div>
-      <h2>Showtimes</h2>
+      <h2>Funciones</h2>
       <ul>
         {showtimes.map(showtime => (
           <li key={showtime._id}>

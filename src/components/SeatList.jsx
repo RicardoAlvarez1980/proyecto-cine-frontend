@@ -7,7 +7,7 @@ const SeatList = () => {
   useEffect(() => {
     const fetchShowtimes = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/funciones-y-butacas');
+        const response = await axios.get('http://localhost:3000/funciones');
         setShowtimes(response.data);
       } catch (error) {
         console.error('Error fetching showtimes:', error);
@@ -19,9 +19,15 @@ const SeatList = () => {
 
   const formatTime = (isoDate) => {
     const date = new Date(isoDate);
-    return date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const localDate = new Date(date.getTime() + (3 * 60 * 60 * 1000)); // Resta 3 horas para UTC-3
+    return localDate.toLocaleTimeString('es-AR', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: false,
+      timeZone: 'America/Argentina/Buenos_Aires' 
+    });
   };
-
+  
   return (
     <div>
       <h2>Funciones y Butacas</h2>
