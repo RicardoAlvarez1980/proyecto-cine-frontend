@@ -1,0 +1,108 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center; /* Centrar el texto */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #ece1e1;
+}
+
+/* Estilos específicos de tu aplicación de cine */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+.app {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white; /* Fondo blanco para la aplicación */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333; /* Color del texto oscuro para contraste */
+}
+
+.add-cinema-form {
+    margin-bottom: 20px;
+}
+
+.add-cinema-form input {
+    margin: 10px 0;
+    padding: 10px;
+    width: calc(100% - 20px);
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px;
+}
+
+.add-cinema-form button {
+    padding: 10px;
+    background: #28a745; /* Color verde para el botón */
+    color: white; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-cinema-form button:hover {
+    background: #218838; /* Color verde más oscuro en hover */
+}
+
+.cinema-list {
+    margin-top: 20px;
+}
+
+.cinema-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cinema-list li {
+    padding: 10px;
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: #fff; /* Fondo blanco para las listas */
+    color: #333; /* Color del texto oscuro para contraste */
+}
