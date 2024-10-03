@@ -1,30 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const CinemaList = () => {
-  const [cinemas, setCinemas] = useState([]);
-
-  useEffect(() => {
-    const fetchCinemas = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/cines');
-        setCinemas(response.data);
-      } catch (error) {
-        console.error('Error fetching cinemas:', error);
-      }
-    };
-
-    fetchCinemas();
-  }, []);
-
+const CinemaList = ({ cinemas }) => {
   return (
     <div>
-      <h2>Cines</h2>
-      <ul>
-        {cinemas.map(cinema => (
-          <li key={cinema._id}>{cinema.name} - {cinema.location}</li>
-        ))}
-      </ul>
+      {cinemas.length > 0 ? (
+        cinemas.map((cinema) => (
+          <div key={cinema._id} style={{ marginBottom: '20px' }}>
+            <h2>{cinema.nombre} - {cinema.ubicacion}</h2>
+            {cinema.salas.length > 0 ? (
+              cinema.salas.map((sala) => (
+                <div key={sala._id} style={{ marginLeft: '20px' }}>
+                  <h3>Sala {sala.numero_sala}</h3>
+                  <p>Butacas: {sala.butacas}</p>
+                  <h4>Película: {sala.pelicula.titulo}</h4>
+                  <p>Director: {sala.pelicula.director}</p>
+                  <p>Duración: {sala.pelicula.duracion} minutos</p>
+                  <p>Género: {sala.pelicula.genero}</p>
+                  <h5>Horarios:</h5>
+                  <ul>
+                    {sala.horarios.map((horario, index) => (
+                      <li key={index}>{horario}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p>No hay salas disponibles en este cine.</p>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>No hay cines disponibles.</p>
+      )}
     </div>
   );
 };

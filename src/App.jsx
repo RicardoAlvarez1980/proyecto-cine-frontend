@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import CinemaList from './components/CinemaList';
-import MovieList from './components/MovieList';
-import RoomList from './components/RoomList';
-import ShowtimeList from './components/ShowtimeList';
-import SeatList from './components/SeatList';
-import './styles.css';
 
 const App = () => {
+  const [cinemas, setCinemas] = useState([]);
+
+  useEffect(() => {
+    // Llama al backend para obtener la lista de cines
+    axios.get('http://localhost:3000/cines')
+      .then(response => {
+        setCinemas(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching cinemas:', error);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Cine Reservas</h1>
-      <CinemaList />
-      <MovieList />
-      <RoomList />
-      <ShowtimeList />
-      <SeatList />
+    <div>
+      <h1>Lista de Cines</h1>
+      <CinemaList cinemas={cinemas} />
     </div>
   );
-};
+}
 
 export default App;
