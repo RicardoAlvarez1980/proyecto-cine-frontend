@@ -1,14 +1,25 @@
-// src/components/ShowtimeList.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Seat from './Seat'; // Importamos el componente de butaca
 
 const ShowtimeList = ({ horarios, butacas }) => {
   const [occupiedSeats, setOccupiedSeats] = useState({});
   const [selectedHour, setSelectedHour] = useState(null); // Nuevo estado para almacenar la hora seleccionada
 
+  // Recupera las butacas ocupadas desde localStorage al montar el componente
+  useEffect(() => {
+    const storedSeats = localStorage.getItem('occupiedSeats');
+    if (storedSeats) {
+      setOccupiedSeats(JSON.parse(storedSeats));
+    }
+  }, []);
+
   const handleSeatClick = (hour, seatLabel) => {
     const key = `${hour}-${seatLabel}`;
-    setOccupiedSeats((prev) => ({ ...prev, [key]: !prev[key] })); // Ocupa/desocupa al hacer clic
+    setOccupiedSeats((prev) => {
+      const newOccupiedSeats = { ...prev, [key]: !prev[key] }; // Ocupa/desocupa al hacer clic
+      localStorage.setItem('occupiedSeats', JSON.stringify(newOccupiedSeats)); // Persistir en localStorage
+      return newOccupiedSeats;
+    });
   };
 
   // Crea una matriz para los asientos (10x10)
