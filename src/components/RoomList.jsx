@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/RoomList.jsx
+import React, { useState } from 'react';
+import ShowtimeList from './ShowtimeList'; // Importamos el componente para mostrar horarios y butacas
 
-const RoomList = () => {
-  const [rooms, setRooms] = useState([]);
+const RoomList = ({ salas }) => {
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/salas'); // Cambia esta URL según corresponda
-        setRooms(response.data);
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-        setRooms([]); // Manejo de errores, puedes establecer un estado por defecto
-      }
-    };
-
-    fetchRooms();
-  }, []);
-
-  if (!Array.isArray(rooms) || rooms.length === 0) {
-    return <div>No hay salas disponibles.</div>;
-  }
+  const toggleRoom = (numeroSala) => {
+    setSelectedRoom(selectedRoom === numeroSala ? null : numeroSala); // Mostrar/ocultar horarios de la sala
+  };
 
   return (
     <div>
-      <h2>Salas</h2>
-      <ul>
-        {rooms.map((room) => (
-          <li key={room._id}>
-            Sala: {room.name || 'Sin nombre'} {/* Maneja el caso de que `name` sea undefined */}
-          </li>
-        ))}
-      </ul>
+      {salas.map((sala) => (
+        <div key={sala.numero_sala}>
+          <h3 onClick={() => toggleRoom(sala.numero_sala)} style={{ cursor: 'pointer' }}>
+            Sala {sala.numero_sala}
+          </h3>
+          {selectedRoom === sala.numero_sala && (
+            <ShowtimeList horarios={sala.horarios} butacas={sala.butacas} /> // Pasamos los horarios y butacas a ShowtimeList
+          )}
+        </div>
+      ))}
     </div>
   );
 };

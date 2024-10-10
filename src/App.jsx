@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CinemaList from './components/CinemaList';
+import './App.css';
+import AddCinema from './components/AddCinema'; // Importamos el componente para agregar cines
+import CinemaList from './components/CinemaList'; // Importamos el componente para la lista de cines
 
-const App = () => {
-  const [cinemas, setCinemas] = useState([]);
+function App() {
+  const [cines, setCines] = useState([]);
+
+  const fetchCines = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/cines'); // Cambia la URL según tu configuración
+      setCines(response.data);
+    } catch (error) {
+      console.error("Error al obtener los cines", error);
+    }
+  };
+
+  // Función para agregar un nuevo cine a la lista
+  const addCinemaToList = (newCinema) => {
+    setCines([...cines, newCinema]); // Actualiza la lista con el nuevo cine
+  };
 
   useEffect(() => {
-    // Llama al backend para obtener la lista de cines
-    axios.get('http://localhost:3000/cines')
-      .then(response => {
-        setCinemas(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching cinemas:', error);
-      });
+    fetchCines(); // Llamamos la función para obtener los cines cuando el componente se monte
   }, []);
 
   return (
-    <div>
-      <h1>Lista de Cines</h1>
-      <CinemaList cinemas={cinemas} />
+    <div className="App">
+      <h1>Listado de Cines</h1>
+
+      {/* Mostramos la lista de cines con sus salas, películas y horarios */}
+      <CinemaList cines={cines} />
+
+      {/* Componente para agregar nuevos cines */}
+      <AddCinema onAdd={addCinemaToList} />
     </div>
   );
 }

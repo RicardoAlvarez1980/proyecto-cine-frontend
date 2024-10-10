@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/MovieList.jsx
+import React, { useState } from 'react';
+import ShowtimeList from './ShowtimeList'; // Importamos el componente para listar horarios
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/peliculas');
-        setMovies(response.data);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+const MovieList = ({ pelicula, horarios }) => {
+  const [showtimesVisible, setShowtimesVisible] = useState(false);
 
   return (
-    <div>
-      <h2>Películas</h2>
-      <ul>
-        {movies.map(movie => (
-          <li key={movie._id}>{movie.title} - {movie.genre}</li>
-        ))}
-      </ul>
+    <div style={{ paddingLeft: '40px' }}>
+      <div onClick={() => setShowtimesVisible(!showtimesVisible)} style={{ cursor: 'pointer' }}>
+        Película: {pelicula.titulo} ({pelicula.duracion} minutos) - Dirigida por {pelicula.director}
+      </div>
+
+      {/* Si los horarios están visibles, los mostramos */}
+      {showtimesVisible && <ShowtimeList horarios={horarios} />}
     </div>
   );
 };

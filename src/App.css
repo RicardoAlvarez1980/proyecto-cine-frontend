@@ -1,37 +1,13 @@
-/* App.css */
-.container {
-  display: flex;
-}
-
-nav {
-  width: 200px;
-  padding: 20px;
-  background-color: #f4f4f4;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-main {
-  padding: 20px;
-  flex-grow: 1;
-}
+h3, h4, h5, h6 {
+    cursor: pointer;
+    color: #007BFF;
+  }
+  
+  h3:hover, h4:hover, h5:hover, h6:hover {
+    text-decoration: underline;
+  }
+  
+  div {
+    margin: 10px 0;
+  }
+  

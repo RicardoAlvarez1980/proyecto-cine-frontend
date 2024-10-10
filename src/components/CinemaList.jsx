@@ -1,38 +1,30 @@
-import React from 'react';
+// src/components/CinemaList.jsx
+import React, { useState } from 'react';
+import RoomList from './RoomList'; // Importamos el componente para listar salas
+import ShowtimeList from './ShowtimeList'; // Importamos ShowtimeList para mostrar horarios y butacas
 
-const CinemaList = ({ cinemas }) => {
+const CinemaList = ({ cines }) => {
+  const [selectedCinema, setSelectedCinema] = useState(null);
+
+  const toggleCinema = (id) => {
+    setSelectedCinema(selectedCinema === id ? null : id); // Mostrar/ocultar las salas del cine
+  };
+
   return (
-    <div>
-      {cinemas.length > 0 ? (
-        cinemas.map((cinema) => (
-          <div key={cinema._id} style={{ marginBottom: '20px' }}>
-            <h2>{cinema.nombre} - {cinema.ubicacion}</h2>
-            {cinema.salas.length > 0 ? (
-              cinema.salas.map((sala) => (
-                <div key={sala._id} style={{ marginLeft: '20px' }}>
-                  <h3>Sala {sala.numero_sala}</h3>
-                  <p>Butacas: {sala.butacas}</p>
-                  <h4>Película: {sala.pelicula.titulo}</h4>
-                  <p>Director: {sala.pelicula.director}</p>
-                  <p>Duración: {sala.pelicula.duracion} minutos</p>
-                  <p>Género: {sala.pelicula.genero}</p>
-                  <h5>Horarios:</h5>
-                  <ul>
-                    {sala.horarios.map((horario, index) => (
-                      <li key={index}>{horario}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            ) : (
-              <p>No hay salas disponibles en este cine.</p>
-            )}
+    <ul>
+      {cines.map((cine) => (
+        <li key={cine._id}>
+          <div onClick={() => toggleCinema(cine._id)} style={{ cursor: 'pointer' }}>
+            {cine.nombre} - {cine.ubicacion}
           </div>
-        ))
-      ) : (
-        <p>No hay cines disponibles.</p>
-      )}
-    </div>
+          
+          {/* Si el cine está seleccionado, mostramos las salas */}
+          {selectedCinema === cine._id && (
+            <RoomList salas={cine.salas} /> // Asumimos que RoomList mostrará las salas
+          )}
+        </li>
+      ))}
+    </ul>
   );
 };
 
