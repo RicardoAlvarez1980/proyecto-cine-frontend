@@ -1,30 +1,38 @@
-// src/components/CinemaList.jsx
-import React, { useState } from 'react';
-import RoomList from './RoomList'; // Importamos el componente para listar salas
-import ShowtimeList from './ShowtimeList'; // Importamos ShowtimeList para mostrar horarios y butacas
+import React, { useState, useEffect } from 'react';
+import RoomList from './RoomList';
 
-const CinemaList = ({ cines }) => {
-  const [selectedCinema, setSelectedCinema] = useState(null);
+const CinemaList = ({ cines, onAddRoom }) => {
+  const [cinesState, setCinesState] = useState(cines);
 
-  const toggleCinema = (id) => {
-    setSelectedCinema(selectedCinema === id ? null : id); // Mostrar/ocultar las salas del cine
+  useEffect(() => {
+    setCinesState(cines);
+  }, [cines]);
+
+  const handleAddRoom = (newRoomData) => {
+    setCinesState((prevCines) => {
+      return prevCines.map((cine) => {
+        if (cine._id === newRoomData.cineId) {
+          return {
+            ...cine,
+            salas: [...cine.salas, newRoomData],
+          };
+        }
+        return cine;
+      });
+    });
+    onAddRoom(newRoomData); // Llama a la función que actualiza el estado en App
   };
 
   return (
-    <ul>
-      {cines.map((cine) => (
-        <li key={cine._id}>
-          <div onClick={() => toggleCinema(cine._id)} style={{ cursor: 'pointer' }}>
-            {cine.nombre} - {cine.ubicacion}
-          </div>
-          
-          {/* Si el cine está seleccionado, mostramos las salas */}
-          {selectedCinema === cine._id && (
-            <RoomList salas={cine.salas} /> // Asumimos que RoomList mostrará las salas
-          )}
-        </li>
+    <div>
+      {cinesState.map((cine) => (
+        <div key={cine._id}>
+          <h2>{cine.nombre}</h2>
+          <RoomList salas={cine.salas} />
+          {/* Componente AddRoom se debe incluir en App.jsx y debe tener la función onAdd */}
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
