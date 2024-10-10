@@ -1,4 +1,3 @@
-// src/components/RoomList.jsx
 import React, { useState } from 'react';
 import ShowtimeList from './ShowtimeList'; // Importamos el componente para mostrar horarios y butacas
 
@@ -17,7 +16,10 @@ const RoomList = ({ salas }) => {
             Sala {sala.numero_sala}
           </h3>
           {selectedRoom === sala.numero_sala && (
-            <ShowtimeList horarios={sala.horarios} butacas={sala.butacas} /> // Pasamos los horarios y butacas a ShowtimeList
+            <div>
+              <h4>{sala.pelicula.titulo}</h4> {/* Mostrar el título de la película */}
+              <ShowtimeList horarios={sala.horarios} butacas={sala.butacas} /> {/* Pasamos los horarios y butacas a ShowtimeList */}
+            </div>
           )}
         </div>
       ))}
