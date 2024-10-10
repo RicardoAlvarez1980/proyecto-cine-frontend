@@ -10,4 +10,18 @@ h3, h4, h5, h6 {
   div {
     margin: 10px 0;
   }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el tamaño mínimo de los cuadrados */
+    gap: 20px; /* Espacio entre los cuadrados */
+  }
+  
+  .box {
+    background-color: #f8f9fa; /* Color de fondo */
+    border: 1px solid #dee2e6; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  }
   

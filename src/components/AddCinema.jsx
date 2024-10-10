@@ -21,23 +21,29 @@ function AddCinema({ onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mb-3">
       <h2>Agregar un nuevo cine</h2>
-      <input
-        type="text"
-        placeholder="Nombre del cine"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)} // Actualiza el valor del estado
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="Ubicación del cine"
-        value={ubicacion}
-        onChange={(e) => setUbicacion(e.target.value)} // Actualiza el valor del estado
-      />
-      <br />
-      <button type="submit">Agregar Cine</button>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Nombre del cine"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)} // Actualiza el valor del estado
+          required // Agrega la validación de campo requerido
+        />
+      </div>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Ubicación del cine"
+          value={ubicacion}
+          onChange={(e) => setUbicacion(e.target.value)} // Actualiza el valor del estado
+          required // Agrega la validación de campo requerido
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">Agregar Cine</button>
     </form>
   );
 }
