@@ -1,67 +1,114 @@
-/* RoomList.css */
-
-.room-list {
-  padding: 20px; /* Añadir un poco de relleno */
+.room-list-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  max-width: 900px; /* Aumentar el ancho máximo para más espacio */
+  margin: 0 auto; /* Centra el contenedor */
 }
 
 .cine-title {
-  font-size: 2em; /* Tamaño del título del cine */
+  color: white;
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.5rem;
   margin-bottom: 20px; /* Espacio inferior */
-  text-align: center; /* Centrar el texto */
-  color: #333; /* Color del texto */
 }
 
-.cards-container {
-  display: flex; /* Usar flexbox para el contenedor de tarjetas */
-  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten en múltiples filas */
-  justify-content: center; /* Centrar las tarjetas en el contenedor */
-  gap: 20px; /* Espacio entre las tarjetas */
+.room-buttons {
+  display: flex;
+  justify-content: center; /* Centra los botones */
+  flex-wrap: wrap; /* Permite que los botones se envuelvan */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.room-button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1 1 120px; /* Permitir que los botones se expandan */
+  min-width: 100px;
+}
+
+.room-button:hover {
+  background-color: #0056b3;
 }
 
 .card {
-  background-color: #fff; /* Fondo blanco para las tarjetas */
-  border-radius: 8px; /* Esquinas redondeadas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para un efecto de elevación */
-  padding: 15px; /* Relleno interno */
-  text-align: center; /* Centrar el contenido de la tarjeta */
-  max-width: 300px; /* Ancho máximo de la tarjeta */
-  transition: transform 0.2s; /* Transición suave para el hover */
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 0 20px; /* Agregar margen a los lados para un mayor espaciado */
 }
 
-.card:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+.movie-details {
+  display: flex;
+  align-items: center; /* Alinea el póster y los detalles verticalmente */
+  margin-bottom: 20px; /* Espacio inferior entre detalles de la película */
 }
 
 .movie-poster {
-  width: 100%; /* Hacer que el poster ocupe todo el ancho de la tarjeta */
-  height: auto; /* Mantener la proporción de aspecto */
-  border-radius: 4px; /* Esquinas redondeadas para la imagen */
-  margin-bottom: 10px; /* Espacio inferior de la imagen */
+  max-width: 150px; /* Controla el tamaño del póster */
+  height: auto;
+  margin-right: 20px; /* Espacio a la derecha del póster */
 }
 
-.card p {
-  font-size: 0.9em; /* Tamaño de fuente para el texto */
-  color: #666; /* Color del texto */
-  margin: 5px 0; /* Espacio superior e inferior */
-}
-/* Estilo global o en RoomList.css */
-
-body {
-  margin: 0; /* Elimina márgenes por defecto */
-  height: 100vh; /* Altura total de la ventana */
-  background: linear-gradient(135deg, #3a6073, #ff6f61, #8e44ad);
-  background-size: 400% 400%; /* Para animar el fondo */
-  animation: gradientAnimation 10s ease infinite; /* Animación del fondo */
+.horarios-container {
+  display: flex;
+  flex-direction: column; /* Coloca los horarios en una columna */
+  margin-bottom: 20px; /* Espacio inferior */
 }
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
+.horario-button {
+  margin: 5px 0; /* Espacio vertical entre botones de horarios */
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.horario-button:hover {
+  background-color: #218838;
+}
+
+.back-button {
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Botón ocupa el 100% del ancho del contenedor */
+}
+
+.back-button:hover {
+  background-color: #c82333;
+}
+
+/* Media Queries para mejorar la responsividad */
+@media (max-width: 600px) {
+  .movie-details {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    align-items: flex-start; /* Alinea a la izquierda */
   }
-  50% {
-    background-position: 100% 50%;
+
+  .movie-poster {
+    margin: 0 auto; /* Centra el póster en pantallas pequeñas */
   }
-  100% {
-    background-position: 0% 50%;
+
+  .room-button,
+  .horario-button,
+  .back-button {
+    flex: 1 1 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    min-width: auto; /* Elimina el ancho mínimo en pantallas pequeñas */
   }
 }

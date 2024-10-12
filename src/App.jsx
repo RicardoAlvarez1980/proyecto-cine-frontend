@@ -5,7 +5,7 @@ import CinemaList from './components/CineList';
 const App = () => {
   return (
     <div>
-      <h1>Administración de Cines</h1>
+      <h1 className="cinema-list-title">Administración de Cines</h1>
       <CinemaList />
     </div>
   );
