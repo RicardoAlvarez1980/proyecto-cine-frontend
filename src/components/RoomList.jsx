@@ -65,7 +65,6 @@ const RoomList = ({ cineId, onBack }) => {
   return (
     <div className="room-list-container">
       <h2 className="cine-title">CINE: {cineNombre}</h2>
-
       {/* Botones para seleccionar las salas */}
       <div className="room-buttons">
         {salas.map(sala => (

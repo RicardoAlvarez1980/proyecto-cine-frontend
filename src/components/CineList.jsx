@@ -30,7 +30,6 @@ const CinemaList = () => {
     <div className="cinema-list">
       {selectedCinema ? (
         <div>
-          <h2 className="cinema-list-title">CINE: {selectedCinema.nombre}</h2>
           <RoomList cineId={selectedCinema._id} onBack={handleBackToCines} />
         </div>
       ) : (
