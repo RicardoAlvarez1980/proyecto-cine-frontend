@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Seats from './Seats'; // Importar el nuevo componente de butacas
+import Seats from '../Seats'; // Importar el nuevo componente de butacas
 import './RoomList.css';
 
 const RoomList = ({ cineId, onBack }) => {

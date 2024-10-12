@@ -1,0 +1,35 @@
+.home-container {
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Disposición en columna */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    height: 100vh; /* Altura completa de la ventana */
+    background-image: url('/fondo.jpg'); /* Ruta de la imagen */
+    background-size: cover; /* Para que la imagen cubra todo el fondo */
+    background-position: center; /* Para centrar la imagen */
+    color: white; /* Color del texto para mejorar la legibilidad */
+    text-align: center; /* Centrar el texto */
+  }
+  
+  h1 {
+    margin-top: -30px; /* Ajusta este valor según sea necesario */
+    margin-bottom: 20px; /* Agrega espacio debajo del encabezado */
+  }
+  
+  .enter-button {
+    padding: 10px 20px; /* Espaciado del botón */
+    font-size: 16px; /* Tamaño de la fuente del botón */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición para el efecto hover */
+    margin-top: 20px; /* Añadir margen superior al botón */
+  }
+  
+  .enter-button:hover {
+    background-color: rgba(255, 255, 255, 0.7); /* Color del fondo en hover */
+    color: black; /* Cambiar color del texto en hover */
+  }
+  

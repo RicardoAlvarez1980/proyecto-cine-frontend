@@ -1,12 +1,32 @@
-h3, h4, h5, h6 {
-  cursor: pointer;
-  color: #007BFF;
+.home-container {
+  display: flex;
 }
 
-h3:hover, h4:hover, h5:hover, h6:hover {
-  text-decoration: underline;
+.sidebar {
+  width: 200px; /* Ancho del menú lateral */
+  background-color: #f4f4f4;
+  padding: 20px;
 }
 
-div {
+.content {
+  flex-grow: 1; /* El contenido ocupará el espacio restante */
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
   margin: 10px 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar a:hover {
+  color: #007bff; /* Cambia el color al pasar el mouse */
 }
