@@ -1,0 +1,53 @@
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 columnas */
+  gap: 10px; /* Espacio entre las butacas */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+.seat {
+  width: 40px; /* Ancho de cada butaca */
+  height: 40px; /* Alto de cada butaca */
+  background-color: green; /* Color inicial de las butacas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  color: white; /* Color del texto */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.seat.selected {
+  background-color: red; /* Color de las butacas seleccionadas */
+}
+
+.selected-seats {
+  margin-top: 20px; /* Margen superior */
+}
+
+.seat-button {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border: 1px solid #999;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seat-button:hover {
+  background-color: #b3b3b3; /* Color al pasar el ratón */
+}
+
+.seat-button.selected {
+  background-color: #4caf50; /* Color de butaca seleccionada */
+}
+
+.seat-button:disabled {
+  background-color: #ff6666; /* Color de butaca ocupada */
+  cursor: not-allowed;
+}
+
+.seat-list {
+  text-align: center; /* Centrar el texto de la lista de butacas */
+}

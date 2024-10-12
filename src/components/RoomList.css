@@ -24,16 +24,15 @@
 }
 
 .room-button {
+  padding: 10px 20px;
   margin: 5px;
-  padding: 10px 15px;
+  cursor: pointer;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  flex: 1 1 120px; /* Permitir que los botones se expandan */
-  min-width: 100px;
+  border-radius: 4px;
 }
+
 
 .room-button:hover {
   background-color: #0056b3;
@@ -61,33 +60,34 @@
 }
 
 .horarios-container {
-  display: flex;
-  flex-direction: column; /* Coloca los horarios en una columna */
-  margin-bottom: 20px; /* Espacio inferior */
+  display: flex; /* Utiliza flexbox para manejar los botones */
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: center; /* Alinea los botones en el centro */
 }
 
 .horario-button {
-  margin: 5px 0; /* Espacio vertical entre botones de horarios */
+  margin: 5px;
   padding: 10px;
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 4px;
 }
 
+
+
 .horario-button:hover {
-  background-color: #218838;
+  background-color: #0056b3; /* Color de fondo al pasar el mouse */
 }
 
 .back-button {
-  padding: 10px 15px;
+  margin-top: 20px;
+  padding: 10px 20px;
   background-color: #dc3545;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  width: 100%; /* Botón ocupa el 100% del ancho del contenedor */
 }
 
 .back-button:hover {
