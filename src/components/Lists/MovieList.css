@@ -1,0 +1,75 @@
+.movie-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 20px; /* Espacio entre las tarjetas */
+  width: 100%; /* Hace que la grilla ocupe todo el ancho disponible */
+  max-width: 1200px; /* Ancho máximo de la grilla */
+  margin: 0 auto; /* Centra la grilla */
+}
+
+.movie-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+     flex-direction: column; /* Disposición vertical */
+}
+
+.poster-info-container {
+  display: flex; /* Usar flex para colocar el póster y la info uno al lado del otro */
+  padding: 15px;
+}
+
+.poster-container {
+  flex: 1; /* El póster tomará el 50% del espacio */
+  margin-right: 15px; /* Espacio entre el póster y la información */
+}
+
+.poster-image {
+  width: 100%; /* Asegurarse de que el póster use todo el ancho disponible */
+  border-radius: 8px; /* Bordes redondeados para el póster */
+}
+
+.movie-info {
+  flex: 1; /* La información de la película tomará el 50% del espacio */
+}
+
+.movie-poster {
+  width: 100%; /* Asegura que el póster ocupe todo el ancho de la tarjeta */
+  height: auto; /* Mantiene la relación de aspecto */
+}
+
+.cinema-info {
+  padding: 15px;
+  border-top: 1px solid #e0e0e0; /* Línea separadora */
+}
+
+.cinema-title {
+  margin: 0; /* Eliminar márgenes */
+}
+
+.movie-info h4,
+.cinema-info h4,
+.cinema-info p {
+  margin: 5px 0; /* Espacio entre los elementos de texto */
+}
+
+.showtimes-container {
+  display: flex; /* Usar flex para mostrar los horarios en fila */
+  flex-wrap: wrap; /* Permitir que los horarios se muevan a la siguiente línea si es necesario */
+  gap: 5px; /* Espacio entre los horarios */
+}
+
+.showtime-box {
+  background-color: #007bff; /* Color de fondo para los horarios */
+  color: white; /* Color del texto */
+  padding: 5px 10px; /* Espacio interno ajustado */
+  border-radius: 4px; /* Bordes redondeados */
+  text-align: center; /* Centramos el texto */
+  white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+}

@@ -1,0 +1,35 @@
+.movie-list {
+    padding: 20px;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .movie-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    flex: 1 0 30%; /* Ajusta este valor para cambiar el tamaño de las tarjetas */
+    min-width: 250px;
+    max-width: 300px;
+    transition: transform 0.3s;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .movie-poster {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .movie-info p {
+    margin: 5px 0;
+  }
+  

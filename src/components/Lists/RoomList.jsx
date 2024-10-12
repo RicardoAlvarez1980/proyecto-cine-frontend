@@ -1,63 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Seats from '../Seats'; // Importar el nuevo componente de butacas
+import Seats from '../Seats';
+import MovieDetails from './MovieDetails.jsx'; // Importar el nuevo componente
 import './RoomList.css';
 
 const RoomList = ({ cineId, onBack }) => {
   const [salas, setSalas] = useState([]);
   const [cineNombre, setCineNombre] = useState('');
-  const [posters, setPosters] = useState({});
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [selectedShowtime, setSelectedShowtime] = useState(null);
   const [seatSelections, setSeatSelections] = useState({}); // Estado para las butacas por horario
 
   useEffect(() => {
     // Obtener el nombre del cine
-    axios.get(`http://localhost:3000/cines/${cineId}`)
-      .then(response => {
+    const fetchCine = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/cines/${cineId}`);
         setCineNombre(response.data.nombre);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error al obtener el cine:', error);
-      });
+      }
+    };
 
     // Obtener las salas del cine
-    axios.get('http://localhost:3000/salas')
-      .then(response => {
+    const fetchSalas = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/salas');
         const salasDelCine = response.data.filter(sala => sala.cine === cineId);
         setSalas(salasDelCine);
-        salasDelCine.forEach(sala => {
-          fetchMoviePoster(sala.pelicula.titulo);
-        });
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error al obtener las salas:', error);
-      });
-  }, [cineId]);
-
-  const API_KEY = 'a21d39d7f9a02d48415f7e30911bb700';
-
-  const fetchMoviePoster = async (titulo) => {
-    try {
-      const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-        params: {
-          api_key: API_KEY,
-          query: titulo,
-        },
-      });
-      const movie = response.data.results[0];
-      if (movie) {
-        setPosters(prevPosters => ({
-          ...prevPosters,
-          [titulo]: movie.poster_path,
-        }));
-      } else {
-        console.log(`No se encontró película para: ${titulo}`);
       }
-    } catch (error) {
-      console.error('Error al obtener el poster de la película:', error);
-    }
-  };
+    };
+
+    fetchCine();
+    fetchSalas();
+  }, [cineId]);
 
   const handleRoomSelect = (sala) => {
     setSelectedRoom(sala);
@@ -75,8 +53,8 @@ const RoomList = ({ cineId, onBack }) => {
       const isSelected = currentSelections.includes(seatLabel);
 
       const updatedSelections = isSelected
-        ? currentSelections.filter(seat => seat !== seatLabel) // Deselect seat
-        : [...currentSelections, seatLabel]; // Select seat
+        ? currentSelections.filter(seat => seat !== seatLabel) // Deseleccionar butaca
+        : [...currentSelections, seatLabel]; // Seleccionar butaca
 
       return {
         ...prevSelections,
@@ -106,21 +84,10 @@ const RoomList = ({ cineId, onBack }) => {
       {selectedRoom ? (
         <div className="card">
           <h3>Sala {selectedRoom.numero_sala}</h3>
-          <div className="movie-details">
-            {posters[selectedRoom.pelicula.titulo] && (
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${posters[selectedRoom.pelicula.titulo]}`}
-                alt={selectedRoom.pelicula.titulo}
-                className="movie-poster"
-              />
-            )}
-            <div>
-              <p><strong>Película:</strong> {selectedRoom.pelicula.titulo}</p>
-              <p><strong>Género:</strong> {selectedRoom.pelicula.genero}</p>
-              <p><strong>Director:</strong> {selectedRoom.pelicula.director}</p>
-              <p><strong>Duración:</strong> {selectedRoom.pelicula.duracion} minutos</p>
-            </div>
-          </div>
+
+          {/* Aquí mostramos el componente MovieDetails */}
+          <MovieDetails pelicula={selectedRoom.pelicula} />
+
           <p><strong>Horarios:</strong></p>
           <div className="horarios-container">
             {selectedRoom.horarios.map((horario) => (

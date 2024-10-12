@@ -1,44 +1,83 @@
 // src/components/Forms/RoomForm.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const RoomForm = () => {
-  const [numeroSala, setNumeroSala] = useState('');
+const RoomForm = ({ onSuccess }) => {
+  const [cines, setCines] = useState([]);
   const [cineId, setCineId] = useState('');
+  const [numeroSala, setNumeroSala] = useState('');
+  const [butacas, setButacas] = useState(200); // Puedes ajustar el número de butacas por defecto
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    // Obtener la lista de cines disponibles
+    const fetchCines = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/cines');
+        setCines(response.data);
+      } catch (error) {
+        console.error('Error al obtener los cines:', error);
+      }
+    };
+
+    fetchCines();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Manejar el envío del formulario
+
+    try {
+      const response = await axios.post('http://localhost:3000/salas', {
+        cine: cineId,
+        numero_sala: numeroSala,
+        butacas,
+      });
+
+      console.log('Sala creada:', response.data);
+      if (onSuccess) {
+        onSuccess(response.data);
+      }
+    } catch (error) {
+      console.error('Error al crear la sala:', error);
+    }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Agregar Sala</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="numeroSala" className="form-label">Número de Sala</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="numeroSala" 
-            value={numeroSala} 
-            onChange={(e) => setNumeroSala(e.target.value)} 
-            required 
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="cineId" className="form-label">Cine</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="cineId" 
-            value={cineId} 
-            onChange={(e) => setCineId(e.target.value)} 
-            required 
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Agregar Sala</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Cine:</label>
+        <select 
+          value={cineId} 
+          onChange={(e) => setCineId(e.target.value)} 
+          required
+        >
+          <option value="">Seleccione un cine</option>
+          {cines.map((cine) => (
+            <option key={cine._id} value={cine._id}>
+              {cine.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label>Número de Sala:</label>
+        <input 
+          type="text" 
+          value={numeroSala} 
+          onChange={(e) => setNumeroSala(e.target.value)} 
+          required 
+        />
+      </div>
+      <div>
+        <label>Butacas:</label>
+        <input 
+          type="number" 
+          value={butacas} 
+          onChange={(e) => setButacas(e.target.value)} 
+          required 
+        />
+      </div>
+      <button type="submit">Crear Sala</button>
+    </form>
   );
 };
 

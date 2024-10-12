@@ -1,35 +1,32 @@
-// src/components/Sidebar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Sidebar.css'; // Importar el archivo de estilos
 
 const Sidebar = () => {
   return (
-    <nav style={{ width: '200px', padding: '20px', borderRight: '1px solid #ccc' }}>
-      <h2>Administración de Cines</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+    <nav className="sidebar">
+      <h2 className="sidebar-title">Administración de Cines</h2>
+      <ul className="sidebar-list">
         <li>
-          <Link to="/">Inicio</Link>
+          <Link to="/" className="sidebar-link">Inicio</Link>
         </li>
         <li>
-          <Link to="/agregar-cine">Agregar Cine</Link>
+          <Link to="/lista-peliculas" className="sidebar-link">Lista de Películas</Link>
         </li>
         <li>
-          <Link to="/lista-peliculas">Lista de Películas</Link>
+          <Link to="/lista-salas" className="sidebar-link">Lista de Salas</Link>
         </li>
         <li>
-          <Link to="/agregar-pelicula">Agregar Película</Link>
+          <Link to="/formulario-cines" className="sidebar-link">Agregar/Modificar Cines</Link>
         </li>
         <li>
-          <Link to="/lista-salas">Lista de Salas</Link>
+          <Link to="/formulario-salas" className="sidebar-link">Agregar/Modificar Salas</Link>
         </li>
         <li>
-          <Link to="/agregar-sala">Agregar Sala</Link>
+          <Link to="/formulario-peliculas" className="sidebar-link">Agregar/Modificar Películas</Link>
         </li>
         <li>
-          <Link to="/lista-horarios">Lista de Horarios</Link>
-        </li>
-        <li>
-          <Link to="/agregar-horario">Agregar Horario</Link>
+          <Link to="/formulario-horarios" className="sidebar-link">Agregar/Modificar Horarios</Link>
         </li>
       </ul>
     </nav>

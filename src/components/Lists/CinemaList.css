@@ -8,7 +8,7 @@ html, body {
 
 .cinema-list {
     height: 100vh; /* Hacer que el contenedor ocupe el 100% de la altura de la ventana */
-    width: 100vw; /* Hacer que el contenedor ocupe el 100% del ancho de la ventana */
+    width: 80vw; /* Hacer que el contenedor ocupe el 100% del ancho de la ventana */
     padding: 20px; /* Espaciado alrededor del componente */
     background: linear-gradient(to right, #1e3c72, #2a69ac); /* Fondo degradado */
     color: #fff; /* Color del texto */

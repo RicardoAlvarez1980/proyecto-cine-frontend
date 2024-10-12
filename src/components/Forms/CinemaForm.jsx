@@ -1,44 +1,52 @@
-// src/components/Forms/CinemaForm.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const CinemaForm = () => {
+const CinemaForm = ({ onSuccess }) => {
   const [nombre, setNombre] = useState('');
   const [ubicacion, setUbicacion] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Manejar el envío del formulario
+
+    try {
+      const response = await axios.post('http://localhost:3000/cines', {
+        nombre,
+        ubicacion,
+      });
+
+      console.log('Cine creado:', response.data);
+
+      // Llama a la función onSuccess si está definida
+      if (onSuccess) {
+        onSuccess(response.data); // Llama a onSuccess con los datos del nuevo cine
+      }
+    } catch (error) {
+      console.error('Error al crear el cine:', error);
+    }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Agregar Cine</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">Nombre del Cine</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="nombre" 
-            value={nombre} 
-            onChange={(e) => setNombre(e.target.value)} 
-            required 
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="ubicacion" className="form-label">Ubicación</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="ubicacion" 
-            value={ubicacion} 
-            onChange={(e) => setUbicacion(e.target.value)} 
-            required 
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Agregar Cine</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Nombre:</label>
+        <input 
+          type="text" 
+          value={nombre} 
+          onChange={(e) => setNombre(e.target.value)} 
+          required 
+        />
+      </div>
+      <div>
+        <label>Ubicación:</label>
+        <input 
+          type="text" 
+          value={ubicacion} 
+          onChange={(e) => setUbicacion(e.target.value)} 
+          required 
+        />
+      </div>
+      <button type="submit">Crear Cine</button>
+    </form>
   );
 };
 
