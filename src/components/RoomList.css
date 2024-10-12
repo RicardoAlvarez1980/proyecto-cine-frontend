@@ -1,0 +1,67 @@
+/* RoomList.css */
+
+.room-list {
+  padding: 20px; /* Añadir un poco de relleno */
+}
+
+.cine-title {
+  font-size: 2em; /* Tamaño del título del cine */
+  margin-bottom: 20px; /* Espacio inferior */
+  text-align: center; /* Centrar el texto */
+  color: #333; /* Color del texto */
+}
+
+.cards-container {
+  display: flex; /* Usar flexbox para el contenedor de tarjetas */
+  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten en múltiples filas */
+  justify-content: center; /* Centrar las tarjetas en el contenedor */
+  gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.card {
+  background-color: #fff; /* Fondo blanco para las tarjetas */
+  border-radius: 8px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para un efecto de elevación */
+  padding: 15px; /* Relleno interno */
+  text-align: center; /* Centrar el contenido de la tarjeta */
+  max-width: 300px; /* Ancho máximo de la tarjeta */
+  transition: transform 0.2s; /* Transición suave para el hover */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+}
+
+.movie-poster {
+  width: 100%; /* Hacer que el poster ocupe todo el ancho de la tarjeta */
+  height: auto; /* Mantener la proporción de aspecto */
+  border-radius: 4px; /* Esquinas redondeadas para la imagen */
+  margin-bottom: 10px; /* Espacio inferior de la imagen */
+}
+
+.card p {
+  font-size: 0.9em; /* Tamaño de fuente para el texto */
+  color: #666; /* Color del texto */
+  margin: 5px 0; /* Espacio superior e inferior */
+}
+/* Estilo global o en RoomList.css */
+
+body {
+  margin: 0; /* Elimina márgenes por defecto */
+  height: 100vh; /* Altura total de la ventana */
+  background: linear-gradient(135deg, #3a6073, #ff6f61, #8e44ad);
+  background-size: 400% 400%; /* Para animar el fondo */
+  animation: gradientAnimation 10s ease infinite; /* Animación del fondo */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
