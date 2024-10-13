@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Seats from '../Seats';
 import MovieDetails from './MovieDetails.jsx'; // Importar el nuevo componente
-import './RoomList.css';
+import './RoomList.css'; // Asegúrate de tener la hoja de estilos importada
 
 const RoomList = ({ cineId, onBack }) => {
   const [salas, setSalas] = useState([]);
@@ -85,7 +85,7 @@ const RoomList = ({ cineId, onBack }) => {
         <div className="card">
           <h3>Sala {selectedRoom.numero_sala}</h3>
 
-          {/* Aquí mostramos el componente MovieDetails */}
+          {/* Mostrar el componente MovieDetails */}
           <MovieDetails pelicula={selectedRoom.pelicula} />
 
           <p><strong>Horarios:</strong></p>

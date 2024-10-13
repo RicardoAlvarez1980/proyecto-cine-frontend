@@ -8,7 +8,7 @@ import ShowtimeList from './components/Lists/ShowtimeList.jsx';
 import RoomList from './components/Lists/RoomList.jsx';
 import SalaList from './components/Lists/SalaList.jsx'; // Importa SalaList
 
-import CinemaForm from './components/Forms/CinemaForm.jsx';
+import CinemaAdminList from './components/Lists/CinemaAdminList.jsx';
 import MovieForm from './components/Forms/MovieForm.jsx';
 import ShowtimeForm from './components/Forms/ShowtimeForm.jsx';
 import RoomForm from './components/Forms/RoomForm.jsx';
@@ -26,12 +26,11 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/lista-cines" element={<CinemaList />} />
             <Route path="/lista-peliculas" element={<MovieContainer />} />
-            <Route path="/lista-salas" element={<SalaList />} /> {/* Agrega esta línea */}
-            {/* Rutas para formularios */}
-            <Route path="/formulario-cines" element={<CinemaForm />} />
-            <Route path="/formulario-salas" element={<RoomForm />} />
-            <Route path="/formulario-peliculas" element={<MovieForm />} />
-            <Route path="/formulario-horarios" element={<ShowtimeForm />} />
+            <Route path="/lista-salas" element={<SalaList />} />
+            <Route path="/formulario-cines" element={<CinemaAdminList />} /> {/* Agregar ruta para agregar/modificar cines */}
+            <Route path="/formulario-salas" element={<RoomForm />} /> {/* Agregar ruta para agregar/modificar salas */}
+            <Route path="/formulario-peliculas" element={<MovieForm />} /> {/* Agregar ruta para agregar/modificar películas */}
+            <Route path="/formulario-horarios" element={<ShowtimeForm />} /> {/* Agregar ruta para agregar/modificar horarios */}
           </Routes>
         </div>
       </div>

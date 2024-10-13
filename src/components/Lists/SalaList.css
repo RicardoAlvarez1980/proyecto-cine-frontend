@@ -1,12 +1,87 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
 .sala-list-container {
-    margin-top: 20px;
-  }
-  
-  .sala-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-  }
-  
+  height: 100vh;
+  width: 80vw;
+  padding: 20px;
+  background: linear-gradient(to right, #0D3B66, #3F88C5);
+  color: #F4D35E;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.sala-list-title {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.add-sala-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+/* Estilo general para inputs y select */
+.form-input {
+  padding: 0.5rem; /* Ajusta el padding según tus preferencias */
+  border: 1px solid #F4D35E; /* Borde amarillo */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: transparent; /* Fondo transparente */
+  color: white; /* Texto blanco */
+  height: 40px; /* Establece una altura fija para todos los inputs y el select */
+  box-sizing: border-box; /* Asegura que el padding y el border no afecten el ancho total */
+}
+
+/* Asegúrate de que el selector tenga la misma altura que los inputs */
+select {
+  height: 40px; /* Establece la misma altura que los inputs */
+}
+
+/* Estilo para los botones */
+.btn {
+  background-color: #F4D35E; /* Fondo de botón */
+  color: black; /* Texto de botón */
+  border: none; /* Sin borde */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  height: 40px; /* Establece la misma altura que los inputs */
+}
+
+.btn:hover {
+  background-color: #E0C92A; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el grid de salas */
+.sala-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Asegura que el grid ocupe todo el ancho */
+}
+
+.cine-group {
+  margin: 10px 0;
+}
+
+.sala-card {
+  padding: 10px; /* Espaciado interno más pequeño */
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco semi-transparente */
+  display: flex;
+  justify-content: space-between; /* Asegura que el contenido y los botones estén distribuidos */
+  align-items: center; /* Centra verticalmente el contenido */
+  min-height: 60px; /* Altura mínima para cada tarjeta */
+}
+
+.sala-buttons {
+  display: flex;
+  gap: 10px; /* Espaciado entre botones */
+}
