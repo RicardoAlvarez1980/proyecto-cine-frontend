@@ -4,7 +4,6 @@ import './MovieDetails.css';
 
 const MovieDetails = ({ pelicula }) => {
   const [poster, setPoster] = useState('');
-
   const API_KEY = 'a21d39d7f9a02d48415f7e30911bb700';
 
   useEffect(() => {
@@ -28,9 +27,18 @@ const MovieDetails = ({ pelicula }) => {
         console.log(`No se encontró película para: ${titulo}`);
       }
     } catch (error) {
-      console.error('Error al obtener el poster de la película:', error);
+      console.error('Error al obtener el póster de la película:', error);
     }
   };
+
+  // Verificar si la película está disponible
+  if (!pelicula) {
+    return (
+      <div className="no-movie">
+        <p>Esta sala no tiene películas disponibles</p>
+      </div>
+    );
+  }
 
   return (
     <div className="movie-details">
