@@ -10,9 +10,9 @@ const SalaList = () => {
   const [newSala, setNewSala] = useState({ numero_sala: '', butacas: '', cine: '' });
   const [editingSalaId, setEditingSalaId] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [selectedSalaId, setSelectedSalaId] = useState(null); // Estado para la sala seleccionada
-  const [movies, setMovies] = useState([]); // Estado para las películas disponibles
-  const [selectedMovieId, setSelectedMovieId] = useState(''); // Estado para la película seleccionada
+  const [selectedSalaId, setSelectedSalaId] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovieId, setSelectedMovieId] = useState('');
 
   useEffect(() => {
     const fetchSalas = async () => {
@@ -35,7 +35,7 @@ const SalaList = () => {
 
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/peliculas'); // Asegúrate de tener esta ruta
+        const response = await axios.get('http://localhost:3000/peliculas');
         setMovies(response.data);
       } catch (error) {
         console.error('Error al obtener las películas:', error);
@@ -44,7 +44,7 @@ const SalaList = () => {
 
     fetchSalas();
     fetchCines();
-    fetchMovies(); // Obtener la lista de películas
+    fetchMovies();
   }, []);
 
   const fetchSalas = async () => {
@@ -59,7 +59,6 @@ const SalaList = () => {
   const groupAndSortSalas = () => {
     const groupedSalas = {};
 
-    // Agrupar salas por cine
     salas.forEach(sala => {
       const cineInfo = getCineInfo(sala.cine);
       if (!groupedSalas[cineInfo]) {
@@ -68,10 +67,8 @@ const SalaList = () => {
       groupedSalas[cineInfo].push(sala);
     });
 
-    // Convertir el objeto a un array de entradas y ordenar los cines
     const sortedCines = Object.keys(groupedSalas).sort().map(cineInfo => {
-      // Ordenar salas dentro de cada cine
-      const sortedSalas = groupedSalas[cineInfo].sort((a, b) => Number(a.numero_sala) - Number(b.numero_sala));
+      const sortedSalas = groupedSalas[cineInfo].sort((a, b) => a.numero_sala - b.numero_sala);
       return { cineInfo, sortedSalas };
     });
 
@@ -83,26 +80,38 @@ const SalaList = () => {
     return cine ? `${cine.nombre} (${cine.ubicacion})` : 'Cine no encontrado';
   };
 
+  const isNumeroSalaDuplicado = (numeroSala) => {
+    return salas.some(sala => Number(sala.numero_sala) === Number(numeroSala) && sala.cine === newSala.cine);
+  };
+
   const handleAddOrUpdateSala = async () => {
-    if (!newSala.numero_sala || !newSala.butacas || !newSala.cine) {
+    const numeroSala = Number(newSala.numero_sala);
+    const butacas = Number(newSala.butacas);
+
+    if (!numeroSala || !butacas || !newSala.cine) {
       setErrorMessage('Por favor, completa todos los campos.');
       return;
     }
 
-    if (newSala.butacas <= 0) {
+    if (butacas <= 0) {
       setErrorMessage('La cantidad de butacas debe ser un número positivo.');
+      return;
+    }
+
+    if (isNumeroSalaDuplicado(numeroSala)) {
+      setErrorMessage('El número de sala ya existe en este cine.');
       return;
     }
 
     try {
       if (editingSalaId) {
-        await axios.put(`http://localhost:3000/salas/${editingSalaId}`, newSala);
+        await axios.put(`http://localhost:3000/salas/${editingSalaId}`, { ...newSala, numero_sala: numeroSala, butacas });
         setEditingSalaId(null);
       } else {
-        await axios.post('http://localhost:3000/salas', newSala);
+        await axios.post('http://localhost:3000/salas', { ...newSala, numero_sala: numeroSala, butacas });
       }
       setNewSala({ numero_sala: '', butacas: '', cine: '' });
-      await fetchSalas(); // Volver a cargar las salas
+      await fetchSalas();
       setErrorMessage('');
     } catch (error) {
       console.error('Error al agregar o actualizar la sala:', error);
@@ -118,23 +127,23 @@ const SalaList = () => {
   const handleDeleteSala = async (salaId) => {
     try {
       await axios.delete(`http://localhost:3000/salas/${salaId}`);
-      await fetchSalas(); // Volver a cargar las salas después de eliminar
+      await fetchSalas();
     } catch (error) {
       console.error('Error al eliminar la sala:', error);
     }
   };
 
   const handleCancel = () => {
-    setNewSala({ numero_sala: '', butacas: '', cine: '' }); // Reiniciar campos
-    setEditingSalaId(null); // Salir del modo de edición
-    setErrorMessage(''); // Limpiar mensajes de error
-    setSelectedSalaId(null); // Reiniciar la sala seleccionada
-    setSelectedMovieId(''); // Reiniciar película seleccionada
+    setNewSala({ numero_sala: '', butacas: '', cine: '' });
+    setEditingSalaId(null);
+    setErrorMessage('');
+    setSelectedSalaId(null);
+    setSelectedMovieId('');
   };
 
   const handleAddMovie = (salaId) => {
-    setSelectedSalaId(salaId); // Establecer la sala seleccionada
-    setSelectedMovieId(''); // Reiniciar película seleccionada
+    setSelectedSalaId(salaId);
+    setSelectedMovieId('');
   };
 
   const handleAddMovieToSala = async () => {
@@ -147,14 +156,19 @@ const SalaList = () => {
       console.log(`URL: http://localhost:3000/salas/${selectedSalaId}/pelicula/${selectedMovieId}`);
       const response = await axios.put(`http://localhost:3000/salas/${selectedSalaId}/pelicula/${selectedMovieId}`);
       console.log('Película agregada a la sala:', response.data);
-      setSelectedSalaId(null); // Reiniciar la sala seleccionada después de agregar
-      setSelectedMovieId(''); // Reiniciar la película seleccionada
+
+      // Actualiza la lista de salas después de agregar la película
+      await fetchSalas();
+
+      setSelectedSalaId(null);
+      setSelectedMovieId('');
     } catch (error) {
       console.error('Error al agregar la película a la sala:', error);
       alert('Error al agregar la película: ' + error.response?.data?.message || 'Error desconocido');
     }
   };
-  
+
+
   return (
     <div className="sala-list-container">
       <h2 className="sala-list-title">Lista de Salas</h2>
@@ -177,7 +191,7 @@ const SalaList = () => {
         <select
           value={newSala.cine}
           onChange={(e) => setNewSala({ ...newSala, cine: e.target.value })}
-          className="form-input"
+          className="form-input custom-select"
         >
           <option value="">Seleccione un cine</option>
           {cines.map(cine => (
@@ -192,10 +206,10 @@ const SalaList = () => {
             Cancelar
           </button>
         )}
-        {errorMessage && <p style={{ color: '#F4D35E' }}>{errorMessage}</p>}
       </div>
 
-      {/* Mostrar solo la sala seleccionada para agregar película */}
+      {errorMessage && <p style={{ color: '#F4D35E', fontWeight: 'bold' }}>{errorMessage}</p>}
+
       {selectedSalaId === null ? (
         <div className="sala-grid">
           {groupAndSortSalas().map(({ cineInfo, sortedSalas }) => (
@@ -203,41 +217,44 @@ const SalaList = () => {
               <h3>{cineInfo}</h3>
               {sortedSalas.map(sala => (
                 <div key={sala._id} className="sala-card">
-                  <h4>Sala {sala.numero_sala}</h4>
-                  <p>Butacas: {sala.butacas}</p>
-                  <button className="btn btn-info" onClick={() => handleEditSala(sala)}>
-                    Editar
-                  </button>
-                  <button className="btn btn-danger" onClick={() => handleDeleteSala(sala._id)}>
-                    Eliminar
-                  </button>
-                  <button className="btn btn-warning" onClick={() => handleAddMovie(sala._id)}>
-                    Agregar Película
-                  </button>
+                  <div className="sala-info">
+                    <h4>Sala {sala.numero_sala}</h4>
+                    <p>Butacas: {sala.butacas}</p>
+                    {sala.pelicula && (
+                      <div className="pelicula-info">
+                        <br></br>
+                        <h5>{sala.pelicula.titulo}</h5>
+                        
+                      </div>
+                    )}
+                  </div>
+                  <div className="sala-actions">
+                    <button className="btn btn-warning" onClick={() => handleEditSala(sala)}>
+                      Editar
+                    </button>
+                    <button className="btn btn-danger" onClick={() => handleDeleteSala(sala._id)}>
+                      Eliminar
+                    </button>
+                    <button className="btn btn-primary" onClick={() => handleAddMovie(sala._id)}>
+                      Agregar Película
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           ))}
         </div>
       ) : (
-        <div className="add-movie-form">
-          <h2>Agregar Película a Sala</h2>
-          <select
-            value={selectedMovieId}
-            onChange={(e) => setSelectedMovieId(e.target.value)}
-            className="form-input"
-          >
+        <div className="movie-selection">
+          <h3>Agregar película a la sala</h3>
+          <select value={selectedMovieId} onChange={(e) => setSelectedMovieId(e.target.value)}>
             <option value="">Seleccione una película</option>
             {movies.map(movie => (
               <option key={movie._id} value={movie._id}>{movie.titulo}</option>
             ))}
           </select>
-          <button className="btn btn-success" onClick={handleAddMovieToSala}>
-            Agregar Película
-          </button>
-          <button className="btn btn-primary" onClick={handleCancel}>
-            Cancelar
-          </button>
+          <button className="btn btn-success" onClick={handleAddMovieToSala}>Agregar</button>
+          <button className="btn btn-secondary" onClick={() => setSelectedSalaId(null)}>Cancelar</button>
         </div>
       )}
     </div>
