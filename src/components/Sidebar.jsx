@@ -17,16 +17,7 @@ const Sidebar = () => {
           <Link to="/lista-salas" className="sidebar-link">Lista de Salas</Link>
         </li>
         <li>
-          <Link to="/formulario-cines" className="sidebar-link">Agregar/Modificar Cines</Link>
-        </li>
-        <li>
-          <Link to="/formulario-salas" className="sidebar-link">Agregar/Modificar Salas</Link>
-        </li>
-        <li>
-          <Link to="/formulario-peliculas" className="sidebar-link">Agregar/Modificar Películas</Link>
-        </li>
-        <li>
-          <Link to="/formulario-horarios" className="sidebar-link">Agregar/Modificar Horarios</Link>
+          <Link to="/lista-horarios" className="sidebar-link">Agregar/Modificar Horarios</Link>
         </li>
       </ul>
     </nav>

@@ -10,7 +10,6 @@ import SalaList from './components/Lists/SalaList.jsx'; // Importa SalaList
 
 import CinemaAdminList from './components/Lists/CinemaAdminList.jsx';
 import MovieForm from './components/Forms/MovieForm.jsx';
-import ShowtimeForm from './components/Forms/ShowtimeForm.jsx';
 import RoomForm from './components/Forms/RoomForm.jsx';
 import Home from './components/Home.jsx'; // Asegúrate de tener un componente de inicio
 
@@ -30,7 +29,7 @@ const App = () => {
             <Route path="/formulario-cines" element={<CinemaAdminList />} /> {/* Agregar ruta para agregar/modificar cines */}
             <Route path="/formulario-salas" element={<RoomForm />} /> {/* Agregar ruta para agregar/modificar salas */}
             <Route path="/formulario-peliculas" element={<MovieForm />} /> {/* Agregar ruta para agregar/modificar películas */}
-            <Route path="/formulario-horarios" element={<ShowtimeForm />} /> {/* Agregar ruta para agregar/modificar horarios */}
+            <Route path="/lista-horarios" element={<ShowtimeList />} /> {/* Agregar ruta para agregar/modificar horarios */}
           </Routes>
         </div>
       </div>

@@ -80,8 +80,13 @@ const SalaList = () => {
     return cine ? `${cine.nombre} (${cine.ubicacion})` : 'Cine no encontrado';
   };
 
+  // Función modificada para verificar duplicados, excluyendo la sala que se está editando
   const isNumeroSalaDuplicado = (numeroSala) => {
-    return salas.some(sala => Number(sala.numero_sala) === Number(numeroSala) && sala.cine === newSala.cine);
+    return salas.some(sala =>
+      Number(sala.numero_sala) === Number(numeroSala) &&
+      sala.cine === newSala.cine &&
+      sala._id !== editingSalaId // Excluir la sala que se está editando
+    );
   };
 
   const handleAddOrUpdateSala = async () => {
@@ -105,18 +110,24 @@ const SalaList = () => {
 
     try {
       if (editingSalaId) {
+        // Actualizar sala existente
         await axios.put(`http://localhost:3000/salas/${editingSalaId}`, { ...newSala, numero_sala: numeroSala, butacas });
         setEditingSalaId(null);
       } else {
+        // Agregar nueva sala
         await axios.post('http://localhost:3000/salas', { ...newSala, numero_sala: numeroSala, butacas });
       }
+
+      // Limpiar formulario y refrescar la vista
       setNewSala({ numero_sala: '', butacas: '', cine: '' });
       await fetchSalas();
-      setErrorMessage('');
+      setErrorMessage(''); // Limpiar mensaje de error si todo salió bien
     } catch (error) {
       console.error('Error al agregar o actualizar la sala:', error);
+      setErrorMessage('Ocurrió un error al procesar la solicitud. Inténtalo nuevamente.');
     }
   };
+
 
   const handleEditSala = (sala) => {
     setNewSala({ numero_sala: sala.numero_sala, butacas: sala.butacas, cine: sala.cine });
@@ -224,7 +235,7 @@ const SalaList = () => {
                       <div className="pelicula-info">
                         <br></br>
                         <h5>{sala.pelicula.titulo}</h5>
-                        
+
                       </div>
                     )}
                   </div>
