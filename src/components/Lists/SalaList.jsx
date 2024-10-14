@@ -225,19 +225,25 @@ const SalaList = () => {
         <div className="sala-grid">
           {groupAndSortSalas().map(({ cineInfo, sortedSalas }) => (
             <div key={cineInfo} className="cine-group">
+
               <h3>{cineInfo}</h3>
+
               {sortedSalas.map(sala => (
                 <div key={sala._id} className="sala-card">
-                  <div className="sala-info">
-                    <h4>Sala {sala.numero_sala}</h4>
-                    <p>Butacas: {sala.butacas}</p>
-                    {sala.pelicula && (
-                      <div className="pelicula-info">
-                        <br></br>
-                        <h5>{sala.pelicula.titulo}</h5>
+                  {sala.pelicula && (
 
-                      </div>
-                    )}
+                    <div>
+                      <h5>{sala.pelicula.titulo}</h5>
+
+                    </div>
+                  )}
+                  <div className="sala-info">
+
+                    <h4>Sala {sala.numero_sala}</h4>
+
+                    <p>Butacas: {sala.butacas}</p>
+
+
                   </div>
                   <div className="sala-actions">
                     <button className="btn btn-warning" onClick={() => handleEditSala(sala)}>

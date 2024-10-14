@@ -1,28 +1,50 @@
+
+*{
+  margin:0;
+  padding:0;
+}
+
+/* Estilos generales para el sidebar */
 .sidebar {
-  width: 200px;
-  background-color: #f8f9fa;
+  width: 300vh;
+  background: linear-gradient(to right, #0D3B66, #3F88C5);
   padding: 20px;
   border-right: 1px solid #ccc;
 }
 
+/* Título del sidebar */
 .sidebar-title {
   font-size: 20px;
   margin-bottom: 15px;
+  color: #ffc107; /* Color amarillo brillante */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
+/* Lista de links */
 .sidebar-list {
   list-style-type: none;
   padding: 0;
 }
 
+/* Links del sidebar */
 .sidebar-link {
   text-decoration: none;
   color: #333;
   padding: 8px;
   display: block;
-  transition: background 0.3s;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* Estilo de hover para los links */
 .sidebar-link:hover {
-  background-color: #e2e2e2;
+  background-color: #ffc107; /* Fondo amarillo al pasar el mouse */
+  color: #fff; /* Texto blanco al hacer hover */
+}
+
+/* Estilo de link activo (si es necesario) */
+.sidebar-link.active {
+  background-color: #333; /* Fondo oscuro para el link activo */
+  color: #fff; /* Texto blanco */
 }
