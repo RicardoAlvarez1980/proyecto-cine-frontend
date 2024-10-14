@@ -1,21 +1,18 @@
-.showtime-list {
-    margin: 20px;
-  }
-  
-  .cine-list, .sala-list, .pelicula-list {
-    margin-top: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-  }
-  
-  li {
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  li:hover {
-    color: #007BFF;
-  }
-  
+.showtime-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.sala-info, .horarios-info, .cine-info {
+    margin: 10px 0;
+}
+
+h3 {
+    color: #2c3e50;
+}
+
+h4 {
+    color: #34495e;
+}
