@@ -1,44 +1,72 @@
-import React from 'react';
-import './ShowtimeList.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const ShowtimeList = ({ showtimes, onEditShowtime, onDeleteShowtime }) => {
+const ShowtimeList = () => {
+  const [peliculas, setPeliculas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPeliculas = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/peliculas-con-salas-y-horarios');
+        console.log('Datos recibidos del backend:', response.data); // Log para depuración
+        setPeliculas(response.data);
+      } catch (err) {
+        console.error('Error al obtener las películas:', err);
+        setError('Error al cargar las películas');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPeliculas();
+  }, []);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
-    <div className="showtime-list">
-      <h2>Listado de Horarios</h2>
-      {showtimes.length > 0 ? (
-        <table className="table-showtimes">
-          <thead>
-            <tr>
-              <th>Hora</th>
-              <th>Número de Sala</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {showtimes.map((showtime) => (
-              <tr key={showtime._id}>
-                <td>{showtime.time}</td>
-                <td>{showtime.numero_sala}</td> {/* Muestra el número de sala */}
-                <td>
-                  <button
-                    className="btn-edit"
-                    onClick={() => onEditShowtime(showtime)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="btn-delete"
-                    onClick={() => onDeleteShowtime(showtime._id)}
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div>
+      <h2>Películas y Salas</h2>
+      {peliculas.length > 0 ? (
+        peliculas.map((pelicula) => (
+          <div key={pelicula._id}>
+            <h3>{pelicula.titulo}</h3>
+            <p>Director: {pelicula.director}</p>
+            <p>Duración: {pelicula.duracion} minutos</p>
+            <p>Género: {pelicula.genero}</p>
+            <h4>Salas:</h4>
+            {pelicula.salas.length > 0 ? (
+              <ul>
+                {pelicula.salas.map((sala) => (
+                  <li key={sala._id}>
+                    Sala {sala.numero_sala}
+                    <h5>Horarios:</h5>
+                    {sala.horarios.length > 0 ? (
+                      <ul>
+                        {sala.horarios.map((horario) => (
+                          <li key={horario._id}>{horario.hora}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No hay horarios disponibles.</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No hay salas disponibles.</p>
+            )}
+          </div>
+        ))
       ) : (
-        <p>No hay horarios disponibles para esta sala.</p>
+        <p>No hay películas disponibles.</p>
       )}
     </div>
   );

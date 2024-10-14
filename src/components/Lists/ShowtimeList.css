@@ -1,38 +1,21 @@
 .showtime-list {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
   }
   
-  .table-showtimes {
-    width: 100%;
-    border-collapse: collapse;
+  .cine-list, .sala-list, .pelicula-list {
+    margin-top: 20px;
   }
   
-  .table-showtimes th,
-  .table-showtimes td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
+  ul {
+    list-style-type: none;
   }
   
-  .btn-edit,
-  .btn-delete {
-    padding: 8px 12px;
-    margin: 0 4px;
-    border: none;
-    border-radius: 4px;
+  li {
     cursor: pointer;
+    margin-bottom: 10px;
   }
   
-  .btn-edit {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .btn-delete {
-    background-color: #f44336;
-    color: white;
+  li:hover {
+    color: #007BFF;
   }
   
