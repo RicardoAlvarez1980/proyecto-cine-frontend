@@ -2,72 +2,76 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ShowtimeList = () => {
-  const [peliculas, setPeliculas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [horarios, setHorarios] = useState([]);
+  const [cines, setCines] = useState({});
+  const [peliculas, setPeliculas] = useState({});
+  const [error, setError] = useState('');
+
+  // Función para obtener horarios
+  const fetchHorarios = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/horarios');
+      setHorarios(response.data);
+      // Llama a las funciones para obtener cine y película después de obtener horarios
+      await fetchCines(response.data);
+      await fetchPeliculas(response.data);
+    } catch (err) {
+      console.error('Error al obtener los horarios:', err);
+      setError('Error al obtener los horarios');
+    }
+  };
+
+  // Función para obtener detalles del cine
+  const fetchCines = async (horariosData) => {
+    const cineIds = [...new Set(horariosData.map(h => h.sala.cine))];
+    const cinePromises = cineIds.map(id => axios.get(`http://localhost:3000/cines/${id}`));
+    const responses = await Promise.all(cinePromises);
+    const cinesData = {};
+    responses.forEach(response => {
+      cinesData[response.data._id] = response.data;
+    });
+    setCines(cinesData);
+  };
+
+  // Función para obtener detalles de la película
+  const fetchPeliculas = async (horariosData) => {
+    const peliculaIds = [...new Set(horariosData.map(h => h.sala.pelicula))];
+    const peliculaPromises = peliculaIds.map(id => axios.get(`http://localhost:3000/peliculas/${id}`));
+    const responses = await Promise.all(peliculaPromises);
+    const peliculasData = {};
+    responses.forEach(response => {
+      peliculasData[response.data._id] = response.data;
+    });
+    setPeliculas(peliculasData);
+  };
 
   useEffect(() => {
-    const fetchPeliculas = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/peliculas-con-salas-y-horarios');
-        console.log('Datos recibidos del backend:', response.data); // Log para depuración
-        setPeliculas(response.data);
-      } catch (err) {
-        console.error('Error al obtener las películas:', err);
-        setError('Error al cargar las películas');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPeliculas();
+    fetchHorarios();
   }, []);
-
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div>
-      <h2>Películas y Salas</h2>
-      {peliculas.length > 0 ? (
-        peliculas.map((pelicula) => (
-          <div key={pelicula._id}>
-            <h3>{pelicula.titulo}</h3>
-            <p>Director: {pelicula.director}</p>
-            <p>Duración: {pelicula.duracion} minutos</p>
-            <p>Género: {pelicula.genero}</p>
-            <h4>Salas:</h4>
-            {pelicula.salas.length > 0 ? (
-              <ul>
-                {pelicula.salas.map((sala) => (
-                  <li key={sala._id}>
-                    Sala {sala.numero_sala}
-                    <h5>Horarios:</h5>
-                    {sala.horarios.length > 0 ? (
-                      <ul>
-                        {sala.horarios.map((horario) => (
-                          <li key={horario._id}>{horario.hora}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No hay horarios disponibles.</p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No hay salas disponibles.</p>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>No hay películas disponibles.</p>
-      )}
+      <h2>Lista de Horarios</h2>
+      {error && <p>{error}</p>}
+      {horarios.map((horario) => (
+        <div key={horario._id}>
+          <h3>
+            Cine: {cines[horario.sala.cine]?.nombre || 'Cine no disponible'} 
+            ({cines[horario.sala.cine]?.ubicacion || 'Ubicación no disponible'})
+          </h3>
+          <h4>Sala {horario.sala.numero_sala || 'Número no disponible'}</h4>
+          <p>Película: {peliculas[horario.sala.pelicula]?.titulo || 'Película no disponible'}</p>
+          <p>Director: {peliculas[horario.sala.pelicula]?.director || 'Director no disponible'}</p>
+          <p>Butacas disponibles: {horario.sala.butacas || 'Información no disponible'}</p>
+          <h5>Horario: {horario.hora}</h5>
+        </div>
+      ))}
+      <h3>Agregar Nuevo Horario</h3>
+      <form>
+        <input type="text" placeholder="Ingrese la hora (ej. 16:00)" />
+        <input type="text" placeholder="Ingrese el ID de la sala" />
+        <button type="submit">Agregar Horario</button>
+      </form>
     </div>
   );
 };
