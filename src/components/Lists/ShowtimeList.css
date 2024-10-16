@@ -1,137 +1,158 @@
-*{
-    padding:0;
-    margin:0;
-}
 .sala-list-container {
-    height: 100vh;
-    width: 80vw;
-    padding: 20px;
-    background: linear-gradient(to right, #0D3B66, #3F88C5);
-    color: #F4D35E;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow-y: auto;
+  padding: 20px;
+  /* Añadir espacio alrededor del contenedor */
 }
 
-.sala-details {
-    border: 1px solid #3F88C5;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 0;
-    /* Margen entre cada sala */
-    width: 100%;
-    /* Mantener el tamaño de la tarjeta de sala */
-    position: relative;
-    /* Para posicionar el botón */
-}
+.cine-container {
 
-.horarios-container {
-    display: flex;
-    /* Usar flex para alinear los horarios horizontalmente */
-    flex-wrap: wrap;
-    /* Permitir que los elementos se envuelvan */
-    justify-content: flex-start;
-    /* Alinear horarios a la izquierda */
-    margin-left: 10px;
-    /* Margen a la izquierda para un poco de separación */
+  padding: 15px;
+  /* Espacio interno */
+  margin-bottom: 20px;
+  /* Espacio entre cines */
+  width: 80%;
+  /* Ajustar el ancho del contenedor */
+  margin: 0 auto;
+  /* Centrar el contenedor */
 }
-
 
 .cine-name {
-    font-size: 20px;
-    /* Tamaño de fuente para el nombre del cine */
-    color: white;
-    /* Color blanco */
-    font-weight: bold;
-    /* Negrita */
+  font-size: 1.5em;
+  /* Tamaño del texto para el nombre del cine */
+  color: white;
+  margin-bottom: 10px;
+  /* Espacio debajo del nombre del cine */
 }
 
-.pelicula-info {
-    display: flex;
-    justify-content: space-between;
-    /* Espaciado entre elementos */
-    width: 100%;
-    align-items: center;
-    /* Centrar verticalmente */
+.cine-section {
+  border: 2px solid #ccc;
+  /* Borde alrededor de cada cine */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  padding: 10px;
+  /* Espacio interno */
+  border-radius: 5px;
+  /* Bordes redondeados */
 }
 
-.pelicula-title {
-    font-size: 18px;
-    /* Tamaño de fuente para el título de la película */
-    color: #F4D35E;
-    /* Color amarillo */
-    margin-right: 10px;
-    /* Espaciado a la derecha */
+.sala-row {
+  display: flex;
+  /* Cambiar a flex para organizar el contenido */
+  flex-direction: column;
+  /* Alinea los elementos en una columna */
+  margin-bottom: 20px;
+  /* Espacio entre filas de salas */
+}
+
+.sala-info {
+  display: flex;
+  /* Flex para el espacio interno */
+  flex-direction: column;
+  /* Alinea el contenido en vertical */
+  align-items: flex-start;
+  /* Alinea a la izquierda */
 }
 
 .sala-number {
-    font-size: 18px;
-    /* Tamaño de fuente para la sala */
-    color: #F4D35E;
-    /* Color amarillo */
+  font-weight: bold;
+  /* Resaltar el número de la sala */
 }
 
-.horarios-title {
-    margin: 5px 0;
-    /* Margen para el título de horarios */
+.pelicula-title {
+  font-weight: bold;
+  /* Acentúa el título de la película */
+  margin-bottom: 5px;
+  /* Espacio entre título y horarios */
 }
+
+.horarios-container {
+  display: flex; /* O bien, usar flex para mostrar horarios en línea */
+  flex-wrap: wrap; /* Permite que los horarios se envuelvan si es necesario */
+  margin-top: 5px; /* Espacio entre título de película y horarios */
+}
+
+.horario-box {
+  background-color: #90ee90; /* Color de fondo verde claro */
+  color: black; /* Color del texto */
+  font-weight: bolder;
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 10px 15px; /* Espaciado interno */
+  margin-right: 10px; /* Espacio entre los elementos de horarios */
+  margin-bottom: 10px; /* Espacio entre filas de horarios */
+  display: flex; /* Para centrar el texto */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.horario-box:hover {
+  background-color: #76c76d; /* Cambia el color al pasar el mouse */
+}
+
 
 .horario-item {
-    background-color: transparent; /* Fondo transparente o ajusta a un color más suave */
-    border: 1px solid #F4D35E; /* Borde amarillo para el recuadro */
-    border-radius: 8px; /* Bordes redondeados */
-    padding: 10px 15px; /* Espaciado interno */
-    margin: 5px; /* Margen entre los horarios */
-    display: flex; /* Usar flexbox para alinear el contenido */
-    align-items: center; /* Centrar verticalmente */
-    justify-content: center; /* Centrar horizontalmente */
-    min-width: 70px; /* Ancho mínimo para los recuadros */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave para el efecto de profundidad */
-    color: #F4D35E; /* Color del texto amarillo */
-  }
-  
-
-/* Contenedor para los horarios alineados horizontalmente */
-.horarios-container {
-    display: flex;
-    /* Usar flexbox para alinear los horarios horizontalmente */
-    flex-wrap: wrap;
-    /* Permitir que los horarios se envuelvan si no hay suficiente espacio */
-    justify-content: center;
-    /* Centrar horizontalmente */
-    margin-top: 10px;
-    /* Espaciado superior */
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  /* Espacio entre los elementos de horarios */
 }
 
-.add-horario-button {
-    position: absolute;
-    /* Posicionamiento absoluto dentro de la tarjeta */
-    top: 10px;
-    /* Espaciado desde la parte superior */
-    right: 10px;
-    /* Espaciado desde la derecha */
-    background-color: #F4D35E;
-    /* Color del botón */
-    color: #0D3B66;
-    /* Color del texto del botón */
-    border: none;
-    /* Sin borde */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    padding: 5px 10px;
-    /* Espaciado interno del botón */
-    cursor: pointer;
-    /* Cambiar cursor al pasar el mouse */
+.button-container {
+  margin-top: 10px;
+  /* Espacio superior para los botones */
 }
 
+.button {
+  background-color: #007bff;
+  /* Color de fondo del botón */
+  color: white;
+  /* Color del texto del botón */
+  border: none;
+  /* Sin borde */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  padding: 10px 15px;
+  /* Espaciado interno */
+  cursor: pointer;
+  /* Cambiar el cursor al pasar el mouse */
+}
 
+.button:hover {
+  background-color: #0056b3;
+  /* Color de fondo al pasar el mouse */
+}
 
-/* Estilo para el texto cuando no hay horarios disponibles */
-.no-horarios {
-    color: white;
-    /* Color del texto si no hay horarios */
-    text-align: center;
-    /* Centrar el texto */
+.add-horario-form {
+  margin-top: 10px;
+  /* Espacio superior para el formulario */
+  display: flex;
+  /* Usar flex para el formulario */
+  align-items: center;
+  /* Alinear verticalmente */
+}
+
+.add-horario-form input {
+  margin-right: 10px;
+  /* Espacio a la derecha del input */
+  padding: 5px;
+  /* Espaciado interno del input */
+}
+
+.cancel-button {
+  margin-left: 10px;
+  /* Espacio a la izquierda del botón cancelar */
+  background-color: red;
+  /* Color de fondo para el botón cancelar */
+}
+
+.cancel-button:hover {
+  background-color: darkred;
+  /* Color de fondo al pasar el mouse */
+}
+
+.error {
+  color: red;
+  /* Color del texto de error */
+  font-weight: bold;
+  /* Negrita para el mensaje de error */
 }
