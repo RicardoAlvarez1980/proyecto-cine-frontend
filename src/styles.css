@@ -1,3 +1,4 @@
+
 .home-container {
   display: flex;
 }
@@ -6,6 +7,16 @@
 html, body {
   height: 100%; /* Asegúrate de que el html y body ocupen el 100% */
   margin: 0; /* Eliminar márgenes predeterminados */
+  background-color: #333;
+}
+
+/* Estilo para el contenedor raíz */
+body {
+  margin: 0; /* Elimina márgenes predeterminados del navegador */
+  padding: 0; /* Elimina rellenos predeterminados del navegador */
+  background-color: #f0f0f0; /* Color de fondo deseado */
+  height: 100vh; /* Altura del viewport */
+  width: 100vw; /* Ancho del viewport */
 }
 
 #root {

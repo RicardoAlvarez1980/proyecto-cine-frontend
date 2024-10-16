@@ -8,6 +8,8 @@ const Sidebar = () => {
       <ul className="sidebar-list">
         <li>
           <Link to="/" className="sidebar-link">Inicio</Link>
+        </li> <li>
+          <Link to="/lista-cines" className="sidebar-link">Lista de Cines</Link>
         </li>
         <li>
           <Link to="/lista-peliculas" className="sidebar-link">Lista de Películas</Link>

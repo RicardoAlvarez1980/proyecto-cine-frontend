@@ -1,165 +1,72 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-}
-
 .sala-list-container {
-  height: 100vh;
-  width: 80vw;
   padding: 20px;
-  background: linear-gradient(to right, #0D3B66, #3F88C5);
-  color: #F4D35E;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: auto;
+  background-color: #282c34;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 .sala-list-title {
-  font-size: 2.5em;
+  font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .add-sala-form {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 30px;
 }
 
-.add-sala-form,
-.add-movie-form {
-  margin-bottom: 20px;
-}
-
-/* Estilo general para inputs y select */
 .form-input {
-  padding: 0.5rem;
-  /* Ajusta el padding según tus preferencias */
-  border: 1px solid #F4D35E;
-  /* Borde amarillo */
-  border-radius: 4px;
-  /* Bordes redondeados */
-  background-color: transparent;
-  /* Fondo transparente */
-  color: white;
-  /* Texto blanco */
-  height: 40px;
-  /* Establece una altura fija para todos los inputs y el select */
-  box-sizing: border-box;
-  /* Asegura que el padding y el border no afecten el ancho total */
-  margin-right: 10px;
-  padding: 8px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 .custom-select {
-  margin-right: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  color: black;
-  /* Texto negro en el select */
+  background-color: #444;
+  color: #fff;
 }
 
-.custom-select option {
-  color: black;
-  /* Texto negro en las opciones */
+
+.btn-success {
+  background-color: #28a745;
 }
 
-.custom-select option:checked {
-  background-color: #F4D35E;
-  /* Fondo amarillo para la opción seleccionada */
-  color: black;
-  /* Texto negro para la opción seleccionada */
+.btn-primary {
+  background-color: #007bff;
 }
 
-/* Asegúrate de que el selector tenga la misma altura que los inputs */
-select {
-  height: 40px;
-  /* Establece la misma altura que los inputs */
+.btn-warning {
+  background-color: #ffc107;
 }
 
-/* Estilo para los botones */
-.btn {
-  background-color: #F4D35E;
-  /* Fondo de botón */
-  color: black;
-  /* Texto de botón */
-  border: none;
-  /* Sin borde */
-  padding: 0.5rem 1rem;
-  /* Espaciado interno */
-  border-radius: 4px;
-  /* Bordes redondeados */
-  cursor: pointer;
-  /* Cambia el cursor al pasar sobre el botón */
-  height: 40px;
-  /* Establece la misma altura que los inputs */
+.btn-danger {
+  background-color: #dc3545;
 }
 
-.btn:hover {
-  background-color: #E0C92A;
-  /* Color de fondo al pasar el mouse */
-}
-
-/* Estilos para el grid de salas */
 .sala-grid {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  /* Asegura que el grid ocupe todo el ancho */
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .cine-group {
-  margin: 10px 0;
+  flex: 1;
+  min-width: 300px;
 }
 
 .sala-card {
-  display: flex;
-  /* Activa el modo flexbox para el contenedor */
-  justify-content: space-between;
-  /* Espacio entre los elementos */
-  align-items: center;
-  /* Centra verticalmente los elementos */
-  padding: 20px;
-  /* Espaciado interno */
-  border: 1px solid #ccc;
-  /* Borde de la tarjeta */
-  border-radius: 8px;
-  /* Bordes redondeados */
-  margin-bottom: 20px;
-  /* Espacio entre tarjetas */
+  background-color: #333;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .sala-info {
-  flex: 0 0 60%;
-  /* Ocupa el 60% del ancho */
+  margin-bottom: 10px;
 }
 
-.button-group {
+.sala-actions {
   display: flex;
-  gap: 100px;
-  /* Espacio entre botones */
-}
-
-.botones {
-  flex: 0 0 40%;
-  /* Ocupa el 40% del ancho */
-  display: flex;
-  /* Flexbox para los botones */
-  justify-content: flex-end;
-  /* Alinea los botones a la derecha */
   gap: 10px;
-  /* Espacio entre los botones */
-}
-
-/* Estilo para el texto de butacas */
-.sala-card p {
-  font-size: 1.5em;
-  /* Aumenta el tamaño del número de butacas */
-  margin: 0;
-  /* Elimina el margen del párrafo */
 }

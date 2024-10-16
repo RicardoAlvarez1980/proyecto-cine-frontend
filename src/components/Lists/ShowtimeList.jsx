@@ -111,7 +111,7 @@ const ShowtimeList = () => {
 
   return (
     <div className="sala-list-container">
-      <h1>Lista de Horarios</h1>
+      <h2>Lista de Horarios</h2>
       {errorMessage && <p className="error">{errorMessage}</p>}
       {successMessage && <p className="success">{successMessage}</p>}
 

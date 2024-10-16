@@ -1,8 +1,29 @@
 html,
 body {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #1e3c72, #2a69ac); /* Fondo degradado */
+}
+
+.movie-list-container {
+  text-align: left;
+  padding: 20px;
+  background-color: #282c34;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.movie-list-title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.movie-list-title {
+  padding: 20px;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 /* Estilo general para inputs */
@@ -25,7 +46,7 @@ select {
 
 /* Estilo específico para el input de búsqueda */
 .search-input {
-  width: 100%;
+  width: 100vh;
   /* Ancho completo */
   padding: 0.5rem;
   /* Espaciado interno */
@@ -68,9 +89,9 @@ select {
 /* Contenedor principal del listado de películas */
 .movie-list-container {
   height: 100vh;
-  width: 80vw;
+  width: 100vw;
   padding: 20px;
-  background: linear-gradient(to right, #0D3B66, #3F88C5);
+  background: #282c34;
   color: #F4D35E;
   display: flex;
   flex-direction: column;

@@ -14,7 +14,7 @@ const MovieList = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState(null); // Para almacenar la sala seleccionada
 
-  
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -84,7 +84,7 @@ const MovieList = () => {
     setNewMovie({ titulo: '', director: '', duracion: '', genero: '' }); // Reiniciar el formulario
     setShowForm(true); // Mostrar el formulario
   };
-  
+
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
@@ -131,18 +131,18 @@ const MovieList = () => {
           console.error('Error al actualizar la película:', error);
         });
     } else {
-     // Agregar nueva película
-     axios.post('http://localhost:3000/peliculas', { ...newMovie, salaId: selectedRoomId }) // Enviar salaId al backend
-     .then((response) => {
-       setMovies([...movies, response.data]);
-       setShowForm(false);
-       setSelectedRoomId(null); // Reiniciar sala seleccionada
-     })
-     .catch((error) => {
-       console.error('Error al agregar la película:', error);
-     });
- }
-};
+      // Agregar nueva película
+      axios.post('http://localhost:3000/peliculas', { ...newMovie, salaId: selectedRoomId }) // Enviar salaId al backend
+        .then((response) => {
+          setMovies([...movies, response.data]);
+          setShowForm(false);
+          setSelectedRoomId(null); // Reiniciar sala seleccionada
+        })
+        .catch((error) => {
+          console.error('Error al agregar la película:', error);
+        });
+    }
+  };
 
   const handleCancel = () => {
     setShowForm(false); // Cancelar edición/agregar
@@ -155,7 +155,7 @@ const MovieList = () => {
 
   return (
     <div className="movie-list-container">
-      <h2>Películas Disponibles</h2>
+      <h2 className="movie-list-title">Lista de Peliculas</h2>
       <div className="search-container">
         <div className="search-add-container">
           <input
@@ -166,7 +166,7 @@ const MovieList = () => {
             onChange={handleSearchChange}
           />
           {!showForm && (
-            <button className="btn btn-success" onClick={() => handleAddMovieToRoom(selectedRoomId)}>
+            <button className="btn btn-success ml-2 font-weight-bold" onClick={() => handleAddMovieToRoom(selectedRoomId)}>
             Nueva
           </button>
           )}
