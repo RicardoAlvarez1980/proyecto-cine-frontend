@@ -18,7 +18,7 @@ html, body {
 
 .sala-list-container {
   padding: 20px;
-  height: 100%; /* Ocupar el 100% del alto disponible */
+  height: 100vw; /* Ocupar el 100% del alto disponible */
   overflow-y: auto; /* Hacer scroll si el contenido es mayor que la altura */
 }
 
