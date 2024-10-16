@@ -30,9 +30,6 @@ Permite seleccionar una película, una sala y la hora.
 Formulario que permite agregar una nueva sala a un cine existente.
 Se puede seleccionar el cine y definir el número de sala y la cantidad de butacas.
 Utiliza peticiones HTTP para crear nuevas salas en el backend.
-5. Botón "Ver Trailer":
-Este botón está presente en la selección de horarios y en el listado de películas.
-Al hacer clic, redirige al usuario al enlace de YouTube correspondiente al tráiler de la película seleccionada.
 ## Instalación y Ejecución
 Clonar el repositorio:
 git clone https://github.com/RicardoAlvarez1980/proyecto-cine-frontend.git
@@ -47,6 +44,12 @@ Reservar Butacas: Una vez que se elige el horario, el sistema muestra la disposi
 Ver Tráiler: Antes de confirmar la reserva, el usuario puede ver el tráiler de la película haciendo clic en el botón "Ver Trailer".
 ## Notas Técnicas:
 El proyecto está diseñado para comunicarse con un backend que gestiona la lógica de los cines, películas y horarios. Este backend debe estar corriendo localmente para que las peticiones HTTP de Axios funcionen correctamente.
+## Mejoras a Futuro:
+Reservar Butacas: Una vez que se elige el horario, el sistema muestra la disposición de las butacas, y el usuario puede elegir las que están disponibles.
+Ver Tráiler: Antes de confirmar la reserva, el usuario puede ver el tráiler de la película haciendo clic en el botón "Ver Trailer".
+Botón "Ver Trailer":
+Este botón está presente en la selección de horarios y en el listado de películas.
+Al hacer clic, redirige al usuario al enlace de YouTube correspondiente al tráiler de la película seleccionada.
 ## Contribuciones:
 Si deseas contribuir a este proyecto, por favor haz un fork del repositorio y envía un pull request.
 
