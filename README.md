@@ -48,7 +48,7 @@ El proyecto está diseñado para comunicarse con un backend que gestiona la lóg
 Reservar Butacas: Una vez que se elige el horario, el sistema muestra la disposición de las butacas, y el usuario puede elegir las que están disponibles.
 Ver Tráiler: Antes de confirmar la reserva, el usuario puede ver el tráiler de la película haciendo clic en el botón "Ver Trailer".
 Botón "Ver Trailer":
-Este botón está presente en la selección de horarios y en el listado de películas.
+Este botón, fue pensado para estar presente en la selección de horarios y en el listado de películas.
 Al hacer clic, redirige al usuario al enlace de YouTube correspondiente al tráiler de la película seleccionada.
 ## Contribuciones:
 Si deseas contribuir a este proyecto, por favor haz un fork del repositorio y envía un pull request.
