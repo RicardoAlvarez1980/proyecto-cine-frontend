@@ -2,6 +2,29 @@
   display: flex;
 }
 
+/* Asegúrate de que el contenedor root ocupe toda la ventana */
+html, body {
+  height: 100%; /* Asegúrate de que el html y body ocupen el 100% */
+  margin: 0; /* Eliminar márgenes predeterminados */
+}
+
+#root {
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  width: 100%; /* Ocupa todo el ancho */
+  display: flex; /* Permitir el uso de flexbox */
+  flex-direction: column; /* Apilar elementos en columna */
+}
+
+
+.sala-list-container {
+  padding: 20px;
+  height: 100%; /* Ocupar el 100% del alto disponible */
+  overflow-y: auto; /* Hacer scroll si el contenido es mayor que la altura */
+}
+
+/* Resto de tu CSS... */
+
+
 .sidebar {
   width: 200px; /* Ancho del menú lateral */
   background-color: #f4f4f4;

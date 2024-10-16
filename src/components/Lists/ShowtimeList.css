@@ -1,158 +1,146 @@
 .sala-list-container {
   padding: 20px;
-  /* Añadir espacio alrededor del contenedor */
 }
 
 .cine-container {
-
   padding: 15px;
-  /* Espacio interno */
   margin-bottom: 20px;
-  /* Espacio entre cines */
   width: 80%;
-  /* Ajustar el ancho del contenedor */
   margin: 0 auto;
-  /* Centrar el contenedor */
 }
 
 .cine-name {
   font-size: 1.5em;
-  /* Tamaño del texto para el nombre del cine */
   color: white;
   margin-bottom: 10px;
-  /* Espacio debajo del nombre del cine */
 }
 
 .cine-section {
   border: 2px solid #ccc;
-  /* Borde alrededor de cada cine */
   border-radius: 5px;
-  /* Bordes redondeados */
   padding: 10px;
-  /* Espacio interno */
-  border-radius: 5px;
-  /* Bordes redondeados */
 }
 
 .sala-row {
   display: flex;
-  /* Cambiar a flex para organizar el contenido */
   flex-direction: column;
-  /* Alinea los elementos en una columna */
   margin-bottom: 20px;
-  /* Espacio entre filas de salas */
 }
 
 .sala-info {
   display: flex;
-  /* Flex para el espacio interno */
   flex-direction: column;
-  /* Alinea el contenido en vertical */
   align-items: flex-start;
-  /* Alinea a la izquierda */
 }
 
 .sala-number {
   font-weight: bold;
-  /* Resaltar el número de la sala */
 }
 
 .pelicula-title {
   font-weight: bold;
-  /* Acentúa el título de la película */
   margin-bottom: 5px;
-  /* Espacio entre título y horarios */
 }
 
 .horarios-container {
-  display: flex; /* O bien, usar flex para mostrar horarios en línea */
-  flex-wrap: wrap; /* Permite que los horarios se envuelvan si es necesario */
-  margin-top: 5px; /* Espacio entre título de película y horarios */
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
 }
 
 .horario-box {
-  background-color: #90ee90; /* Color de fondo verde claro */
-  color: black; /* Color del texto */
-  font-weight: bolder;
-  border-radius: 12px; /* Bordes redondeados */
-  padding: 10px 15px; /* Espaciado interno */
-  margin-right: 10px; /* Espacio entre los elementos de horarios */
-  margin-bottom: 10px; /* Espacio entre filas de horarios */
-  display: flex; /* Para centrar el texto */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  transition: background-color 0.3s; /* Efecto de transición */
+  background-color: #90ee90;
+  color: black;
+  /* Cambiado a negro */
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .horario-box:hover {
-  background-color: #76c76d; /* Cambia el color al pasar el mouse */
+  background-color: #76c76d;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"],
+select {
+  padding: 0.5rem;
+  border: 1px solid #F4D35E; /* Borde amarillo */
+  border-radius: 4px; /* Bordes redondeados */
+  font-weight: bold; /* Texto en negrita */
+  width: 100%; /* Ancho completo */
+  margin-bottom: 1rem;
+  box-shadow: none; /* Elimina sombras si hay alguna */
+  /* Se eliminan color y background-color para usar los predeterminados */
+}
+
+.input-horario {
+  width: 70px; /* Ajusta el ancho según sea necesario */
+  max-width: 70px; /* Asegúrate de que no supere este ancho */
+  text-align: left; /* Corrige el texto alineado a la izquierda */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 5px; /* Espaciado interno */
+  box-shadow: none; /* Elimina sombras si hay alguna */
+  font-weight: bold; /* Texto en negrita */
 }
 
 
-.horario-item {
-  color: white;
-  font-weight: bold;
-  margin-right: 10px;
-  /* Espacio entre los elementos de horarios */
+/* Asegúrate de que el input no sea transparente */
+.input-horario::placeholder {
+  color: gray;
+  /* Cambia el color del placeholder si es necesario */
 }
 
 .button-container {
-  margin-top: 10px;
-  /* Espacio superior para los botones */
-}
-
-.button {
-  background-color: #007bff;
-  /* Color de fondo del botón */
-  color: white;
-  /* Color del texto del botón */
-  border: none;
-  /* Sin borde */
-  border-radius: 5px;
-  /* Bordes redondeados */
-  padding: 10px 15px;
-  /* Espaciado interno */
-  cursor: pointer;
-  /* Cambiar el cursor al pasar el mouse */
-}
-
-.button:hover {
-  background-color: #0056b3;
-  /* Color de fondo al pasar el mouse */
+  display: flex;
+  justify-content: flex-start;
 }
 
 .add-horario-form {
-  margin-top: 10px;
-  /* Espacio superior para el formulario */
+  margin-top: 15px;
+}
+
+.horario-input-container {
   display: flex;
-  /* Usar flex para el formulario */
+  /* Alineación horizontal */
   align-items: center;
-  /* Alinear verticalmente */
+  /* Alineación vertical */
 }
 
-.add-horario-form input {
-  margin-right: 10px;
-  /* Espacio a la derecha del input */
-  padding: 5px;
-  /* Espaciado interno del input */
-}
-
-.cancel-button {
+.btn {
   margin-left: 10px;
-  /* Espacio a la izquierda del botón cancelar */
-  background-color: red;
-  /* Color de fondo para el botón cancelar */
+  /* Espaciado entre botones */
 }
 
-.cancel-button:hover {
-  background-color: darkred;
-  /* Color de fondo al pasar el mouse */
+/* Estilo para mensajes de error y éxito */
+.message {
+  font-weight: bolder;
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  margin-bottom: 1rem; /* Espacio entre mensajes */
+  font-weight: bold; /* Texto en negrita */
+  display: flex; /* Asegura que se pueda usar alineación flexible si se necesita */
+}
+
+.success {
+  background-color: white; /* Fondo blanco para mensajes de éxito */
+  font-weight: bolder;
+  color: green; /* Color de texto verde para éxito */
+  border: 1px solid #4CAF50; /* Borde verde claro */
 }
 
 .error {
-  color: red;
-  /* Color del texto de error */
-  font-weight: bold;
-  /* Negrita para el mensaje de error */
+  font-weight: bolder;
+  background-color: white; /* Fondo blanco para mensajes de error */
+  color: red; /* Color de texto rojo para error */
+  border: 1px solid #F44336; /* Borde rojo claro */
 }

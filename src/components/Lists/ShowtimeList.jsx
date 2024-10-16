@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import './ShowtimeList.css';
 
@@ -7,8 +7,10 @@ const ShowtimeList = () => {
   const [selectedSala, setSelectedSala] = useState(null);
   const [newHorario, setNewHorario] = useState('');
   const [editingHorarioId, setEditingHorarioId] = useState(null);
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState(''); // Para mostrar mensajes de éxito/error
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const inputRef = useRef(null);
 
   const fetchCines = async () => {
     try {
@@ -16,15 +18,20 @@ const ShowtimeList = () => {
       setCines(response.data);
     } catch (err) {
       console.error('Error al obtener los cines:', err);
-      setError('Error al obtener los datos');
+      setErrorMessage('Error al obtener los datos');
     }
+  };
+
+  const sortHorarios = (horarios) => {
+    return horarios.sort((a, b) => a.hora.localeCompare(b.hora));
   };
 
   const handleAddHorarioClick = (salaId) => {
     setSelectedSala(selectedSala === salaId ? null : salaId);
     setNewHorario('');
     setEditingHorarioId(null);
-    setMessage(''); // Limpiar mensaje
+    setSuccessMessage('');
+    setErrorMessage('');
   };
 
   const handleNewHorarioChange = (e) => {
@@ -33,7 +40,7 @@ const ShowtimeList = () => {
 
   const handleSaveHorario = async (salaId) => {
     if (!newHorario) {
-      alert('Por favor, ingresa un horario válido.');
+      setErrorMessage('Por favor, ingresa un horario válido.');
       return;
     }
 
@@ -43,24 +50,24 @@ const ShowtimeList = () => {
         hora: newHorario,
       });
 
+      await fetchCines();
       setNewHorario('');
       setSelectedSala(null);
-      await fetchCines();
-      setMessage('Horario agregado exitosamente.');
+      setSuccessMessage('Horario agregado exitosamente.');
     } catch (error) {
       console.error('Error al guardar el horario:', error);
-      alert('Ocurrió un error al guardar el horario.');
+      setErrorMessage('Ocurrió un error al guardar el horario.');
     }
   };
 
   const handleEditHorarioClick = (horarioId, hora) => {
     setEditingHorarioId(horarioId);
-    setNewHorario(hora); // Cargar la hora en el input para edición
+    setNewHorario(hora);
   };
 
   const handleUpdateHorario = async (horarioId) => {
     if (!newHorario) {
-      alert('Por favor, ingresa un horario válido.');
+      setErrorMessage('Por favor, ingresa un horario válido.');
       return;
     }
 
@@ -72,23 +79,22 @@ const ShowtimeList = () => {
       setNewHorario('');
       setEditingHorarioId(null);
       await fetchCines();
-      setMessage('Horario actualizado exitosamente.');
+      setSuccessMessage('Horario actualizado exitosamente.');
     } catch (error) {
       console.error('Error al actualizar el horario:', error);
-      alert('Ocurrió un error al actualizar el horario.');
+      setErrorMessage('Ocurrió un error al actualizar el horario.');
     }
   };
 
   const handleDeleteHorario = async (horarioId) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este horario?')) {
       try {
-        const horario = await axios.get(`http://localhost:3000/horarios/${horarioId}`);
         await axios.delete(`http://localhost:3000/horarios/${horarioId}`);
         await fetchCines();
-        setMessage(`Horario de ${horario.data.hora} eliminado exitosamente.`);
+        setSuccessMessage('Horario eliminado exitosamente.');
       } catch (error) {
         console.error('Error al eliminar el horario:', error);
-        alert('Ocurrió un error al eliminar el horario.');
+        setErrorMessage('Ocurrió un error al eliminar el horario.');
       }
     }
   };
@@ -97,17 +103,21 @@ const ShowtimeList = () => {
     fetchCines();
   }, []);
 
+  useEffect(() => {
+    if (selectedSala !== null && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [selectedSala]);
+
   return (
     <div className="sala-list-container">
       <h1>Lista de Horarios</h1>
-
-      {error && <p className="text-danger">{error}</p>}
-      {message && <p className="text-success">{message}</p>} {/* Mensaje de éxito/error */}
+      {errorMessage && <p className="error">{errorMessage}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
 
       {cines.map(cine => (
         <div key={cine._id} className="cine-container">
           <h2 className="cine-name">{cine.nombre} ({cine.ubicacion})</h2>
-
           <div className="cine-section">
             {cine.salas.map(sala => (
               <div key={sala._id} className="sala-row">
@@ -118,7 +128,7 @@ const ShowtimeList = () => {
 
                 <div className="horarios-container">
                   {sala.horarios.length > 0 ? (
-                    sala.horarios.map(horario => (
+                    sortHorarios(sala.horarios).map(horario => (
                       <div key={horario._id} className="horario-box">
                         {editingHorarioId === horario._id ? (
                           <div>
@@ -127,16 +137,17 @@ const ShowtimeList = () => {
                               value={newHorario}
                               onChange={handleNewHorarioChange}
                               placeholder="Ej. 14:00"
-                              className="form-control"
+                              className="input-horario"
+                              ref={inputRef}
                             />
                             <button
-                              className="btn btn-success"
+                              className="btn btn-success font-weight-bold"
                               onClick={() => handleUpdateHorario(horario._id)}
                             >
                               Guardar
                             </button>
                             <button
-                              className="btn btn-secondary"
+                              className="btn btn-secondary font-weight-bold"
                               onClick={() => setEditingHorarioId(null)}
                             >
                               Cancelar
@@ -146,19 +157,19 @@ const ShowtimeList = () => {
                           <div>
                             {horario.hora}
                             <button
-                              className="btn btn-warning ml-2"
+                              className="btn btn-warning font-weight-bold ml-2"
                               onClick={() => handleEditHorarioClick(horario._id, horario.hora)}
                             >
                               Editar
                             </button>
                             <button
-                              className="btn btn-danger ml-2"
+                              className="btn btn-danger font-weight-bold ml-2"
                               onClick={() => handleDeleteHorario(horario._id)}
                             >
                               Eliminar
                             </button>
                           </div>
-                        )}
+                        )} 
                       </div>
                     ))
                   ) : (
@@ -168,34 +179,31 @@ const ShowtimeList = () => {
 
                 <div className="button-container mt-3">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary font-weight-bold"
                     onClick={() => handleAddHorarioClick(sala._id)}
                   >
-                    {selectedSala === sala._id ? 'Cancelar' : 'Agregar Horario'}
+                    {selectedSala === sala._id ? 'Cancelar' : 'Agregar'}
                   </button>
                 </div>
 
                 {selectedSala === sala._id && (
                   <div className="add-horario-form mt-3">
-                    <input
-                      type="text"
-                      value={newHorario}
-                      onChange={handleNewHorarioChange}
-                      placeholder="Ej. 14:00"
-                      className="form-control"
-                    />
-                    <button
-                      className="btn btn-success mt-2"
-                      onClick={() => handleSaveHorario(sala._id)}
-                    >
-                      Guardar Horario
-                    </button>
-                    <button
-                      className="btn btn-secondary mt-2"
-                      onClick={() => setSelectedSala(null)}
-                    >
-                      Cancelar
-                    </button>
+                    <div className="horario-input-container">
+                      <input
+                        type="text"
+                        value={newHorario}
+                        onChange={handleNewHorarioChange}
+                        placeholder="Ej. 14:00"
+                        className="input-horario"
+                        ref={inputRef}
+                      />
+                      <button
+                        className="btn btn-success mt-2 font-weight-bold"
+                        onClick={() => handleSaveHorario(sala._id)}
+                      >
+                        Guardar
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

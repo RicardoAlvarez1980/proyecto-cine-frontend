@@ -5,7 +5,6 @@ import './Sidebar.css'; // Importar el archivo de estilos
 const Sidebar = () => {
   return (
     <nav className="sidebar">
-      <h2 className="sidebar-title">Administración de Cines</h2>
       <ul className="sidebar-list">
         <li>
           <Link to="/" className="sidebar-link">Inicio</Link>
