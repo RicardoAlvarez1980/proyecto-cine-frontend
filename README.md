@@ -49,6 +49,4 @@ Ver Tráiler: Antes de confirmar la reserva, el usuario puede ver el tráiler de
 El proyecto está diseñado para comunicarse con un backend que gestiona la lógica de los cines, películas y horarios. Este backend debe estar corriendo localmente para que las peticiones HTTP de Axios funcionen correctamente.
 ## Contribuciones:
 Si deseas contribuir a este proyecto, por favor haz un fork del repositorio y envía un pull request.
-Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más información.
 
