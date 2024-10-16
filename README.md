@@ -14,17 +14,21 @@ CSS: Para la estética y el diseño visual de la página.
 - Interfaz amigable y dinámica para una mejor experiencia del usuario.
 ## Estructura del Proyecto
 El proyecto está dividido en diferentes componentes de React para mantener el código modular y fácil de manejar.
+
 App.js:
 Componente principal del proyecto que organiza las rutas del sitio web utilizando React Router.
 Renderiza los componentes principales como el listado de cines y la selección de butacas.
+
 CinemaList.js:
 Este componente se encarga de mostrar la lista de cines disponibles.
 Utiliza Axios para hacer una petición HTTP al backend (http://localhost:3000/cines) y obtener la lista de cines.
 Cada cine se renderiza como un componente individual.
+
 ShowtimeForm.js:
 Un formulario para crear, editar y eliminar horarios de cine.
 Realiza peticiones HTTP (POST, PUT, DELETE) para gestionar los horarios en el backend.
 Permite seleccionar una película, una sala y la hora.
+
 RoomForm.js:
 Formulario que permite agregar una nueva sala a un cine existente.
 Se puede seleccionar el cine y definir el número de sala y la cantidad de butacas.
@@ -36,6 +40,7 @@ Instalar las dependencias:
 npm install
 Iniciar la aplicación:
 npm start
+
 ## Explicación del Flujo:
 Seleccionar Cine: El usuario escoge una ciudad y un cine de la lista generada por CinemaList.js.
 Seleccionar Película y Horario: Luego, el usuario selecciona una película y un horario desde el formulario ShowtimeForm.js.
