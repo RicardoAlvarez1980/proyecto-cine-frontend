@@ -1,6 +1,6 @@
 proyecto-cine-frontend
 --
-Trabajo Práctico en conjunto, con Back de otro repositorio complementario (Link del Front: https://github.com/RicardoAlvarez1980/proyecto-cine-frontend) 
+Trabajo Práctico en conjunto, con Back de otro repositorio complementario (Link del Back: https://github.com/RicardoAlvarez1980/proyecto-cine-frontend) 
 Integrantes: Alvarez, Ricardo -  Achaga Pérez, Agustín.
 ## Descripción del Proyecto
 Este proyecto es la interfaz frontend de un sistema de reserva de butacas para cines. Permite a los usuarios seleccionar una ciudad, elegir un cine, una película, un horario, y reservar sus butacas. El proyecto está construido con React.js y se comunica con un backend que gestiona la base de datos de cines, películas y horarios.
