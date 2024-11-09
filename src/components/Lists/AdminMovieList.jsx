@@ -10,7 +10,7 @@ const AdminMovieList = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/peliculas');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/peliculas');
         setMovies(response.data); // Actualiza el estado con las películas
       } catch (error) {
         console.error('Error al obtener las películas:', error);
@@ -30,7 +30,7 @@ const AdminMovieList = () => {
   const handleAddMovie = async (e) => {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
     try {
-      const response = await axios.post('http://localhost:3000/peliculas', newMovie);
+      const response = await axios.post('https://proyecto-cine-backend.onrender.com/peliculas', newMovie);
       setMovies([...movies, response.data]); // Añadir la nueva película a la lista
       setNewMovie({ titulo: '', director: '', duracion: '', genero: '' }); // Reiniciar el formulario
     } catch (error) {
@@ -40,7 +40,7 @@ const AdminMovieList = () => {
 
   const handleDeleteMovie = async (movieId) => {
     try {
-      await axios.delete(`http://localhost:3000/peliculas/${movieId}`);
+      await axios.delete(`https://proyecto-cine-backend.onrender.com/peliculas/${movieId}`);
       setMovies(movies.filter(movie => movie._id !== movieId)); // Eliminar la película de la lista
     } catch (error) {
       console.error('Error al eliminar la película:', error);

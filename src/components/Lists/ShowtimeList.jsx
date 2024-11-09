@@ -14,7 +14,7 @@ const ShowtimeList = () => {
 
   const fetchCines = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/cines-con-salas-peliculas-y-horarios');
+      const response = await axios.get('https://proyecto-cine-backend.onrender.com/cines-con-salas-peliculas-y-horarios');
       setCines(response.data);
     } catch (err) {
       console.error('Error al obtener los cines:', err);
@@ -45,7 +45,7 @@ const ShowtimeList = () => {
     }
 
     try {
-      await axios.post('http://localhost:3000/horarios', {
+      await axios.post('https://proyecto-cine-backend.onrender.com/horarios', {
         sala: salaId,
         hora: newHorario,
       });
@@ -72,7 +72,7 @@ const ShowtimeList = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/horarios/${horarioId}`, {
+      await axios.put(`https://proyecto-cine-backend.onrender.com/horarios/${horarioId}`, {
         hora: newHorario,
       });
 
@@ -89,7 +89,7 @@ const ShowtimeList = () => {
   const handleDeleteHorario = async (horarioId) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este horario?')) {
       try {
-        await axios.delete(`http://localhost:3000/horarios/${horarioId}`);
+        await axios.delete(`https://proyecto-cine-backend.onrender.com/horarios/${horarioId}`);
         await fetchCines();
         setSuccessMessage('Horario eliminado exitosamente.');
       } catch (error) {

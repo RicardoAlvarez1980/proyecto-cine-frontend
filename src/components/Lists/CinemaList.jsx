@@ -13,7 +13,7 @@ const CinemaList = () => {
 
   useEffect(() => {
     // Obtener la lista de cines desde el backend
-    axios.get('http://localhost:3000/cines')
+    axios.get('https://proyecto-cine-backend.onrender.com/cines')
       .then(response => {
         setCines(response.data);
       })
@@ -49,7 +49,7 @@ const CinemaList = () => {
   };
 
   const handleDeleteCinema = (cineId) => {
-    axios.delete(`http://localhost:3000/cines/${cineId}`)
+    axios.delete(`https://proyecto-cine-backend.onrender.com/cines/${cineId}`)
       .then(() => {
         setCines(cines.filter(cine => cine._id !== cineId));
       })
@@ -63,7 +63,7 @@ const CinemaList = () => {
 
     if (newCinema._id) {
       // Editar cine existente
-      axios.put(`http://localhost:3000/cines/${newCinema._id}`, newCinema)
+      axios.put(`https://proyecto-cine-backend.onrender.com/cines/${newCinema._id}`, newCinema)
         .then(response => {
           setCines(cines.map(cine => (cine._id === newCinema._id ? response.data : cine)));
           setIsEditing(false);
@@ -74,7 +74,7 @@ const CinemaList = () => {
         });
     } else {
       // Agregar nuevo cine
-      axios.post('http://localhost:3000/cines', newCinema)
+      axios.post('https://proyecto-cine-backend.onrender.com/cines', newCinema)
         .then(response => {
           setCines([...cines, response.data]);
           setIsEditing(false);

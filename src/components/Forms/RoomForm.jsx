@@ -12,7 +12,7 @@ const RoomForm = ({ onSuccess }) => {
     // Obtener la lista de cines disponibles
     const fetchCines = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/cines');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/cines');
         setCines(response.data);
       } catch (error) {
         console.error('Error al obtener los cines:', error);
@@ -26,7 +26,7 @@ const RoomForm = ({ onSuccess }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/salas', {
+      const response = await axios.post('https://proyecto-cine-backend.onrender.com/salas', {
         cine: cineId,
         numero_sala: numeroSala,
         butacas,

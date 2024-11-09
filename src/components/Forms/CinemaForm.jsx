@@ -9,7 +9,7 @@ const CinemaForm = ({ onSuccess }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/cines', {
+      const response = await axios.post('https://proyecto-cine-backend.onrender.com/cines', {
         nombre,
         ubicacion,
       });

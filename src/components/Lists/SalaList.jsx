@@ -17,7 +17,7 @@ const SalaList = () => {
   useEffect(() => {
     const fetchSalas = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/salas');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/salas');
         setSalas(response.data);
       } catch (error) {
         console.error('Error al obtener las salas:', error);
@@ -26,7 +26,7 @@ const SalaList = () => {
 
     const fetchCines = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/cines');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/cines');
         setCines(response.data);
       } catch (error) {
         console.error('Error al obtener los cines:', error);
@@ -35,7 +35,7 @@ const SalaList = () => {
 
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/peliculas');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/peliculas');
         setMovies(response.data);
       } catch (error) {
         console.error('Error al obtener las películas:', error);
@@ -49,7 +49,7 @@ const SalaList = () => {
 
   const fetchSalas = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/salas');
+      const response = await axios.get('https://proyecto-cine-backend.onrender.com/salas');
       setSalas(response.data);
     } catch (error) {
       console.error('Error al obtener las salas:', error);
@@ -109,10 +109,10 @@ const SalaList = () => {
 
     try {
       if (editingSalaId) {
-        await axios.put(`http://localhost:3000/salas/${editingSalaId}`, { ...newSala, numero_sala: numeroSala, butacas });
+        await axios.put(`https://proyecto-cine-backend.onrender.com/salas/${editingSalaId}`, { ...newSala, numero_sala: numeroSala, butacas });
         setEditingSalaId(null);
       } else {
-        await axios.post('http://localhost:3000/salas', { ...newSala, numero_sala: numeroSala, butacas });
+        await axios.post('https://proyecto-cine-backend.onrender.com/salas', { ...newSala, numero_sala: numeroSala, butacas });
       }
 
       setNewSala({ numero_sala: '', butacas: '', cine: '' });
@@ -132,7 +132,7 @@ const SalaList = () => {
 
   const handleDeleteSala = async (salaId) => {
     try {
-      await axios.delete(`http://localhost:3000/salas/${salaId}`);
+      await axios.delete(`https://proyecto-cine-backend.onrender.com/salas/${salaId}`);
       await fetchSalas();
     } catch (error) {
       console.error('Error al eliminar la sala:', error);
@@ -161,7 +161,7 @@ const SalaList = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/salas/${selectedSalaId}/pelicula/${selectedMovieId}`);
+      await axios.put(`https://proyecto-cine-backend.onrender.com/salas/${selectedSalaId}/pelicula/${selectedMovieId}`);
       await fetchSalas();
       setSelectedSalaId(null);
       setSelectedMovieId('');

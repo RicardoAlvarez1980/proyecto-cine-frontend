@@ -7,7 +7,7 @@ const ShowtimeForm = ({ showtimeId, onSuccess }) => {
 
   useEffect(() => {
     if (showtimeId) {
-      axios.get(`http://localhost:3000/horarios/${showtimeId}`)
+      axios.get(`https://proyecto-cine-backend.onrender.com/horarios/${showtimeId}`)
         .then(response => {
           setHora(response.data.hora);
           setSalaId(response.data.sala);
@@ -21,14 +21,14 @@ const ShowtimeForm = ({ showtimeId, onSuccess }) => {
     const showtimeData = { hora, sala: salaId };
 
     if (showtimeId) {
-      axios.put(`http://localhost:3000/horarios/${showtimeId}`, showtimeData)
+      axios.put(`https://proyecto-cine-backend.onrender.com/horarios/${showtimeId}`, showtimeData)
         .then(response => {
           onSuccess();
           alert('Horario actualizado con éxito');
         })
         .catch(error => console.error('Error al actualizar el horario:', error));
     } else {
-      axios.post('http://localhost:3000/horarios', showtimeData)
+      axios.post('https://proyecto-cine-backend.onrender.com/horarios', showtimeData)
         .then(response => {
           onSuccess();
           alert('Horario creado con éxito');
@@ -39,7 +39,7 @@ const ShowtimeForm = ({ showtimeId, onSuccess }) => {
 
   const handleDelete = () => {
     if (showtimeId && window.confirm('¿Estás seguro de que deseas eliminar este horario?')) {
-      axios.delete(`http://localhost:3000/horarios/${showtimeId}`)
+      axios.delete(`https://proyecto-cine-backend.onrender.com/horarios/${showtimeId}`)
         .then(response => {
           onSuccess();
           alert('Horario eliminado con éxito');

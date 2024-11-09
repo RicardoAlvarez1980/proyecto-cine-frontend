@@ -18,7 +18,7 @@ const MovieList = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/peliculas-con-salas-y-horarios');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/peliculas-con-salas-y-horarios');
         setMovies(response.data); // Actualiza el estado con las películas
       } catch (error) {
         console.error('Error al obtener las películas:', error);
@@ -65,7 +65,7 @@ const MovieList = () => {
   useEffect(() => {
     const fetchCinemas = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/cines');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/cines');
         const cinemaMap = {};
         response.data.forEach(cinema => {
           cinemaMap[cinema._id] = cinema.nombre; // Crea un mapa de cines con su ID como clave
@@ -104,7 +104,7 @@ const MovieList = () => {
   };
 
   const handleDeleteClick = (movieId) => {
-    axios.delete(`http://localhost:3000/peliculas/${movieId}`)
+    axios.delete(`https://proyecto-cine-backend.onrender.com/peliculas/${movieId}`)
       .then(() => {
         // Actualizar la lista después de eliminar
         setMovies(movies.filter(movie => movie._id !== movieId));
@@ -118,7 +118,7 @@ const MovieList = () => {
     e.preventDefault();
     if (selectedMovie) {
       // Editar película existente
-      axios.put(`http://localhost:3000/peliculas/${selectedMovie._id}`, newMovie)
+      axios.put(`https://proyecto-cine-backend.onrender.com/peliculas/${selectedMovie._id}`, newMovie)
         .then(() => {
           // Actualizar la lista de películas
           const updatedMovies = movies.map(movie =>
@@ -132,7 +132,7 @@ const MovieList = () => {
         });
     } else {
       // Agregar nueva película
-      axios.post('http://localhost:3000/peliculas', { ...newMovie, salaId: selectedRoomId }) // Enviar salaId al backend
+      axios.post('https://proyecto-cine-backend.onrender.com/peliculas', { ...newMovie, salaId: selectedRoomId }) // Enviar salaId al backend
         .then((response) => {
           setMovies([...movies, response.data]);
           setShowForm(false);

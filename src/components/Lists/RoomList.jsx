@@ -15,7 +15,7 @@ const RoomList = ({ cineId, onBack }) => {
     // Obtener el nombre del cine
     const fetchCine = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/cines/${cineId}`);
+        const response = await axios.get(`https://proyecto-cine-backend.onrender.com/cines/${cineId}`);
         setCineNombre(response.data.nombre);
       } catch (error) {
         console.error('Error al obtener el cine:', error);
@@ -25,7 +25,7 @@ const RoomList = ({ cineId, onBack }) => {
     // Obtener las salas del cine
     const fetchSalas = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/salas');
+        const response = await axios.get('https://proyecto-cine-backend.onrender.com/salas');
         const salasDelCine = response.data.filter(sala => sala.cine === cineId);
         setSalas(salasDelCine);
       } catch (error) {

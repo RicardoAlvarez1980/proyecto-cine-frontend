@@ -10,7 +10,7 @@ const CinemaAdminList = () => {
 
   useEffect(() => {
     // Obtener la lista de cines desde el backend
-    axios.get('http://localhost:3000/cines')
+    axios.get('https://proyecto-cine-backend.onrender.com/cines')
       .then(response => {
         setCines(response.data);
       })
@@ -34,7 +34,7 @@ const CinemaAdminList = () => {
     // Limpiar el mensaje de error si la validación es exitosa
     setError('');
 
-    axios.post('http://localhost:3000/cines', nuevoCine)
+    axios.post('https://proyecto-cine-backend.onrender.com/cines', nuevoCine)
       .then(response => {
         setCines([...cines, response.data]);
         setNuevoCine({ nombre: '', ubicacion: '' }); // Reiniciar el formulario
@@ -58,7 +58,7 @@ const CinemaAdminList = () => {
 
     setError('');
 
-    axios.put(`http://localhost:3000/cines/${editarCine._id}`, nuevoCine)
+    axios.put(`https://proyecto-cine-backend.onrender.com/cines/${editarCine._id}`, nuevoCine)
       .then(response => {
         setCines(cines.map(c => (c._id === editarCine._id ? response.data : c)));
         setEditarCine(null);
@@ -70,7 +70,7 @@ const CinemaAdminList = () => {
   };
 
   const handleDeleteCine = (cineId) => {
-    axios.delete(`http://localhost:3000/cines/${cineId}`)
+    axios.delete(`https://proyecto-cine-backend.onrender.com/cines/${cineId}`)
       .then(() => {
         setCines(cines.filter(c => c._id !== cineId));
         // Reiniciar el formulario si se elimina el cine que está siendo editado
