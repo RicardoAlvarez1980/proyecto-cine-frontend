@@ -7,7 +7,7 @@ const MovieContainer = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/peliculas')  // Cambia esta URL a la de tu API
+    axios.get('https://proyecto-cine-backend.onrender.com/peliculas')  // Cambia esta URL a la de tu API
       .then(response => {
         setMovies(response.data);  // Asegúrate de que tu backend devuelve un array de películas
     })
